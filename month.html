@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026年1月｜沖縄手帳 Web版プレ</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="planner">
+  <header class="appbar">
+    <div class="appbar-left">
+      <div class="menu">☰</div>
+      <div class="app-title">沖縄手帳 Web版 プレ版</div>
+    </div>
+    <div class="controls">
+      <button class="control-btn">今日</button>
+      <button class="control-btn">‹</button>
+      <button class="control-btn">›</button>
+      <select class="month-select">
+        <option>2026年1月</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="month-head">
+    <div class="month-left">
+      <div class="month-num">1</div>
+      <div class="month-meta">
+        <div>2026</div>
+        <div>令和8年</div>
+      </div>
+      <div class="month-en">January</div>
+    </div>
+    <div class="save-note">※データは端末に保存されます。</div>
+  </section>
+
+  <section class="calendar-grid">
+    <div class="week">
+      <div>月 Mon</div><div>火 Tue</div><div>水 Wed</div><div>木 Thu</div>
+      <div>金 Fri</div><div class="sat">土 Sat</div><div class="sun">日 Sun</div>
+      <div class="memo-head">メモ<br>Memo</div>
+    </div>
+    <div id="days" class="days"></div>
+  </section>
+
+  <div class="legend">
+    <span><i class="dot"></i>六曜</span>
+    <span><i class="dot gold"></i>旧暦</span>
+    <span><i class="dot red"></i>沖縄行事・記念日</span>
+    <span><i class="dot green"></i>二十四節気</span>
+  </div>
+
+  <section class="detail-panel">
+    <div class="detail-box">
+      <div id="detail"></div>
+    </div>
+    <div class="detail-box">
+      <h2>予定・メモ</h2>
+      <textarea id="memo" placeholder="この日の予定やメモを入力"></textarea>
+      <button id="save" class="memo-save">この端末に保存</button>
+    </div>
+  </section>
+</div>
+
+<nav class="tabbar">
+  <a class="tab active" href="./month.html"><span>▦</span>月表示</a>
+  <a class="tab" href="#"><span>□</span>日表示</a>
+  <a class="tab" href="#"><span>✎</span>予定・メモ</a>
+  <a class="tab" href="#"><span>✿</span>各種情報</a>
+  <a class="tab" href="./index.html"><span>⚙</span>表紙へ</a>
+</nav>
+
+<script src="./app.js"></script>
+</body>
+</html>
