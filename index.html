@@ -9,26 +9,38 @@
 <body>
 <header class="cover">
   <div class="coverInner">
-    <div class="brand">OKINAWA TECHO WEB PREVIEW</div>
-    <h1>沖縄手帳<br>Web版プレ</h1>
-    <p>紙の沖縄手帳の情報を、スマホで読みやすく。月表示はシンプルに、日付を押すと旧暦・六曜・行事を詳しく確認できます。</p>
-    <a href="#app" class="startBtn">月間カレンダーを開く</a>
+    <div class="brand">OKINAWA TECHO DIGITAL</div>
+    <div class="goldFrame">
+      <div class="kana">まじゅん果報さびら</div>
+      <h1>沖縄手帳</h1>
+      <div class="year">2027 WEB PREVIEW</div>
+      <p>旧暦・六曜・沖縄行事を、スマホで読みやすく。</p>
+      <a href="#app" class="startBtn">手帳を開く</a>
+    </div>
   </div>
 </header>
 
 <main id="app" class="app">
   <section class="monthHeader">
-    <div>
-      <div class="small">2027 / OKINAWA TECHO</div>
-      <h2 id="monthTitle">1月</h2>
-      <p id="monthMeta"></p>
+    <div class="monthNav">
+      <button id="prevMonth" type="button">‹ 前月</button>
+      <button id="todayBtn" type="button">1月へ</button>
+      <button id="nextMonth" type="button">次月 ›</button>
     </div>
-    <select id="monthSelect" aria-label="月を選択"></select>
+
+    <div class="monthTitleRow">
+      <div>
+        <div class="small">2027 / OKINAWA TECHO</div>
+        <h2 id="monthTitle">1月</h2>
+        <p id="monthMeta"></p>
+      </div>
+      <select id="monthSelect" aria-label="月を選択"></select>
+    </div>
   </section>
 
-  <section class="seasonBox">
-    <div class="small">沖縄季節暦</div>
-    <p id="seasonText"></p>
+  <section class="legendBox">
+    <div class="legendItem"><span class="dot gold"></span>行事あり</div>
+    <div class="legendItem"><span class="dot black"></span>予定メモあり</div>
   </section>
 
   <section class="weekHeader">
@@ -36,6 +48,11 @@
   </section>
 
   <section id="calendarGrid" class="calendarGrid"></section>
+
+  <section class="seasonBox">
+    <div class="small">沖縄季節暦</div>
+    <ul id="seasonText"></ul>
+  </section>
 
   <section id="detailPanel" class="detailPanel">
     <div class="handle"></div>
@@ -64,11 +81,6 @@
   </section>
 </main>
 
-<nav class="bottomNav">
-  <button id="prevMonth" type="button">‹ 前月</button>
-  <button id="todayBtn" type="button">1月へ</button>
-  <button id="nextMonth" type="button">次月 ›</button>
-</nav>
 
 <script src="data.js"></script>
 <script src="script.js"></script>

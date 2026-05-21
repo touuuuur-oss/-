@@ -127,11 +127,14 @@ select{
   border:1px solid var(--line);
   border-radius:14px;
   background:var(--paper);
-  padding:7px 5px;
-  text-align:left;
+  padding:8px 4px;
+  text-align:center;
   cursor:pointer;
   position:relative;
   overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .dayCell.empty{
   opacity:.35;
@@ -140,9 +143,12 @@ select{
 }
 .dayNum{
   display:block;
-  font-size:20px;
+  width:100%;
+  text-align:center;
+  font-size:22px;
   font-weight:950;
   line-height:1;
+  margin-top:2px;
 }
 .dayCell.sun .dayNum{color:var(--red)}
 .dayCell.sat .dayNum{color:var(--blue)}
@@ -154,6 +160,8 @@ select{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  max-width:100%;
+  text-align:center;
 }
 .eventDot{
   position:absolute;
@@ -299,3 +307,91 @@ textarea{
   }
   .dayCell{min-height:92px}
 }
+
+/* v2 refinements */
+.cover{
+  min-height:56vh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(232,204,130,.18), transparent 34%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 1px, transparent 1px 5px),
+    linear-gradient(135deg,#050505,#151311 55%,#050505);
+}
+.coverInner{padding:34px 0}
+.goldFrame{
+  border:1px solid rgba(201,164,91,.55);
+  border-radius:24px;
+  padding:28px 22px;
+  text-align:center;
+  box-shadow:inset 0 0 40px rgba(201,164,91,.08);
+}
+.kana{
+  color:#e6d29a;
+  letter-spacing:.12em;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.cover h1{
+  font-size:clamp(54px,15vw,92px);
+  line-height:1.02;
+  margin:8px 0;
+  letter-spacing:.08em;
+}
+.year{
+  color:#e6d29a;
+  letter-spacing:.22em;
+  font-size:13px;
+  font-weight:900;
+}
+.monthHeader{
+  display:block;
+  padding:14px;
+  box-shadow:0 8px 22px rgba(63,43,20,.07);
+}
+.monthNav{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-bottom:14px;
+}
+.monthNav button{
+  background:#111;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  padding:11px 8px;
+  font-weight:900;
+}
+.monthTitleRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+}
+.legendBox{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:10px 12px;
+  margin:12px 0;
+  font-size:13px;
+  font-weight:800;
+  color:#5d554c;
+}
+.legendItem{display:flex;align-items:center;gap:6px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.dot.gold{background:var(--gold)}
+.dot.black{background:#111}
+.seasonBox{margin:16px 0 0}
+.seasonBox ul{
+  margin:8px 0 0;
+  padding-left:20px;
+  color:#5f554a;
+  line-height:1.6;
+  font-size:13px;
+}
+.seasonBox li{margin:4px 0}
+.bottomNav{display:none!important}
+body{padding-bottom:24px}

@@ -37,7 +37,13 @@ function renderMonth(){
   monthSelect.value = currentMonthIndex;
   monthTitle.textContent = `${m.month}月`;
   monthMeta.textContent = `${m.dialect || ""} / ${m.english || ""}`;
-  seasonText.textContent = m.season || "季節暦情報を表示します。";
+  seasonText.innerHTML = "";
+  const seasons = Array.isArray(m.season) && m.season.length ? m.season : (m.season ? [m.season] : ["季節暦情報を表示します。"]);
+  seasons.forEach(s => {
+    const li = document.createElement("li");
+    li.textContent = s;
+    seasonText.appendChild(li);
+  });
 
   calendarGrid.innerHTML = "";
 
