@@ -1,60 +1,80 @@
-
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>沖縄手帳 Web版プレ</title>
-<link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>沖縄手帳 Web版プレ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="cover">
-  <div class="cover-inner">
-    <div class="cover-top">
-      <div class="cover-copy">
-        沖縄の暮らしに寄り添う<br>
-        情報満載の決定版手帳
-      </div>
-      <div class="cover-year">沖縄<br>手帳<br>2026</div>
+  <header class="cover">
+    <div class="cover__texture"></div>
+    <div class="cover__inner">
+      <p class="cover__kicker">2027 OKINAWA TECHO WEB PREVIEW</p>
+      <h1>沖縄手帳<br><span>Web版プレ</span></h1>
+      <p class="cover__lead">PDFの紙面イメージをベースに、スマホで月間カレンダーを確認する試作版です。</p>
+      <a class="cover__button" href="#app">月間ページを見る</a>
     </div>
+  </header>
 
-    <section class="cover-main">
-      <div class="kana">まじゅん果報さびら</div>
-      <h1 class="cover-title">沖縄手帳</h1>
-      <div class="cover-en">2026 OKINAWA TECHO</div>
-
-      <div class="info-line">沖縄情報満載　沖縄を再発見しよう！</div>
-
-      <div class="icon-row">
-        <div class="icon-card"><span class="icon">☯</span>旧暦・六曜</div>
-        <div class="icon-card"><span class="icon">🗓</span>沖縄の行事</div>
-        <div class="icon-card"><span class="icon">☁</span>潮汐・天気</div>
-        <div class="icon-card"><span class="icon">✦</span>県内情報</div>
-        <div class="icon-card"><span class="icon">▣</span>メモ・予定</div>
+  <main id="app" class="app">
+    <section class="toolbar" aria-label="月選択">
+      <button id="prevBtn" class="circle" type="button">‹</button>
+      <div class="monthTitle">
+        <small id="yearLabel">2027</small>
+        <strong id="monthLabel">1月</strong>
+        <span id="monthEn">January</span>
       </div>
-
-      <a href="./month.html" class="main-button">
-        <span>📖</span> Web版を開く <small>›</small>
-      </a>
-
-      <div class="cover-note">※このWeb版はプレ版です。予定データは端末に保存されます。</div>
+      <button id="nextBtn" class="circle" type="button">›</button>
     </section>
 
-    <div class="ribbon">
-      <p>県内売り上げ<br>No.1!</p>
-      <div>
-        <h2>沖縄情報満載</h2>
-        <p style="text-align:center">沖縄を再発見しよう！</p>
-        <div class="chips">
-          <span class="chip">旧暦</span><span class="chip">六曜</span><span class="chip">潮汐情報</span>
-          <span class="chip">沖縄季節館</span><span class="chip">年中行事</span><span class="chip">県内情報</span>
-        </div>
-      </div>
-      <p>沖縄県民<br>必携の一冊!</p>
-    </div>
+    <section class="monthStrip" id="monthStrip"></section>
 
-    <div class="cover-footer">© 2026 San Printing Co., Ltd.</div>
-  </div>
-</main>
+    <section class="paperCard">
+      <div class="paperHead">
+        <div>
+          <p class="sectionLabel">MONTHLY PAPER VIEW</p>
+          <h2 id="paperTitle">2027年1月</h2>
+        </div>
+        <button id="zoomBtn" type="button" class="miniBtn">拡大</button>
+      </div>
+      <div id="paperFrame" class="paperFrame">
+        <img id="paperImage" alt="沖縄手帳 月間カレンダー紙面">
+      </div>
+      <p class="caption">紙面の色・罫線・余白感を確認するため、PDF画像をそのまま表示しています。</p>
+    </section>
+
+    <section class="infoGrid">
+      <article class="infoCard">
+        <p class="sectionLabel">PICKUP</p>
+        <h3>この月の行事候補</h3>
+        <ul id="eventsList"></ul>
+      </article>
+      <article class="infoCard">
+        <p class="sectionLabel">MEMO</p>
+        <h3>端末メモ</h3>
+        <textarea id="memo" placeholder="この月のメモを入力"></textarea>
+        <button id="saveMemo" type="button" class="saveBtn">この端末に保存</button>
+      </article>
+    </section>
+
+    <section class="checkCard">
+      <p class="sectionLabel">制作側確認メモ</p>
+      <h3>今後、制作チームに確認したい点</h3>
+      <ol>
+        <li>CSVから「日付・旧暦・六曜・行事」を日別に分離できるか。</li>
+        <li>紙面そのまま表示で良い範囲と、スマホ用に再レイアウトする範囲。</li>
+        <li>年間更新時のCSV書き出しルールを固定できるか。</li>
+      </ol>
+    </section>
+  </main>
+
+  <nav class="bottomNav" aria-label="アプリメニュー">
+    <a href="#app" class="active">月</a>
+    <a href="#eventsList">行事</a>
+    <a href="#memo">メモ</a>
+    <a href="#">設定</a>
+  </nav>
+  <script src="script.js"></script>
 </body>
 </html>
