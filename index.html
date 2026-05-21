@@ -1,80 +1,76 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>沖縄手帳 Web版プレ</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>沖縄手帳 Web版プレ</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="cover">
-    <div class="cover__texture"></div>
-    <div class="cover__inner">
-      <p class="cover__kicker">2027 OKINAWA TECHO WEB PREVIEW</p>
-      <h1>沖縄手帳<br><span>Web版プレ</span></h1>
-      <p class="cover__lead">PDFの紙面イメージをベースに、スマホで月間カレンダーを確認する試作版です。</p>
-      <a class="cover__button" href="#app">月間ページを見る</a>
+<header class="cover">
+  <div class="coverInner">
+    <div class="brand">OKINAWA TECHO WEB PREVIEW</div>
+    <h1>沖縄手帳<br>Web版プレ</h1>
+    <p>紙の沖縄手帳の情報を、スマホで読みやすく。月表示はシンプルに、日付を押すと旧暦・六曜・行事を詳しく確認できます。</p>
+    <a href="#app" class="startBtn">月間カレンダーを開く</a>
+  </div>
+</header>
+
+<main id="app" class="app">
+  <section class="monthHeader">
+    <div>
+      <div class="small">2027 / OKINAWA TECHO</div>
+      <h2 id="monthTitle">1月</h2>
+      <p id="monthMeta"></p>
     </div>
-  </header>
+    <select id="monthSelect" aria-label="月を選択"></select>
+  </section>
 
-  <main id="app" class="app">
-    <section class="toolbar" aria-label="月選択">
-      <button id="prevBtn" class="circle" type="button">‹</button>
-      <div class="monthTitle">
-        <small id="yearLabel">2027</small>
-        <strong id="monthLabel">1月</strong>
-        <span id="monthEn">January</span>
+  <section class="seasonBox">
+    <div class="small">沖縄季節暦</div>
+    <p id="seasonText"></p>
+  </section>
+
+  <section class="weekHeader">
+    <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+  </section>
+
+  <section id="calendarGrid" class="calendarGrid"></section>
+
+  <section id="detailPanel" class="detailPanel">
+    <div class="handle"></div>
+    <div class="detailHead">
+      <div>
+        <div class="small">DAY DETAIL</div>
+        <h3 id="detailTitle">日付を選択</h3>
       </div>
-      <button id="nextBtn" class="circle" type="button">›</button>
-    </section>
+      <button id="closeDetail" type="button">閉じる</button>
+    </div>
 
-    <section class="monthStrip" id="monthStrip"></section>
+    <div class="infoGrid">
+      <div><span>旧暦</span><strong id="detailLunar">-</strong></div>
+      <div><span>六曜</span><strong id="detailRokuyo">-</strong></div>
+      <div><span>干支</span><strong id="detailZodiac">-</strong></div>
+    </div>
 
-    <section class="paperCard">
-      <div class="paperHead">
-        <div>
-          <p class="sectionLabel">MONTHLY PAPER VIEW</p>
-          <h2 id="paperTitle">2027年1月</h2>
-        </div>
-        <button id="zoomBtn" type="button" class="miniBtn">拡大</button>
-      </div>
-      <div id="paperFrame" class="paperFrame">
-        <img id="paperImage" alt="沖縄手帳 月間カレンダー紙面">
-      </div>
-      <p class="caption">紙面の色・罫線・余白感を確認するため、PDF画像をそのまま表示しています。</p>
-    </section>
+    <div class="eventBox">
+      <div class="small">行事・メモ</div>
+      <ul id="detailEvents"></ul>
+    </div>
 
-    <section class="infoGrid">
-      <article class="infoCard">
-        <p class="sectionLabel">PICKUP</p>
-        <h3>この月の行事候補</h3>
-        <ul id="eventsList"></ul>
-      </article>
-      <article class="infoCard">
-        <p class="sectionLabel">MEMO</p>
-        <h3>端末メモ</h3>
-        <textarea id="memo" placeholder="この月のメモを入力"></textarea>
-        <button id="saveMemo" type="button" class="saveBtn">この端末に保存</button>
-      </article>
-    </section>
+    <label class="memoLabel">予定メモ</label>
+    <textarea id="memo" placeholder="この日の予定やメモを入力"></textarea>
+    <button id="saveMemo" class="saveBtn" type="button">この端末に保存</button>
+  </section>
+</main>
 
-    <section class="checkCard">
-      <p class="sectionLabel">制作側確認メモ</p>
-      <h3>今後、制作チームに確認したい点</h3>
-      <ol>
-        <li>CSVから「日付・旧暦・六曜・行事」を日別に分離できるか。</li>
-        <li>紙面そのまま表示で良い範囲と、スマホ用に再レイアウトする範囲。</li>
-        <li>年間更新時のCSV書き出しルールを固定できるか。</li>
-      </ol>
-    </section>
-  </main>
+<nav class="bottomNav">
+  <button id="prevMonth" type="button">‹ 前月</button>
+  <button id="todayBtn" type="button">1月へ</button>
+  <button id="nextMonth" type="button">次月 ›</button>
+</nav>
 
-  <nav class="bottomNav" aria-label="アプリメニュー">
-    <a href="#app" class="active">月</a>
-    <a href="#eventsList">行事</a>
-    <a href="#memo">メモ</a>
-    <a href="#">設定</a>
-  </nav>
-  <script src="script.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
