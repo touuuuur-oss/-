@@ -395,3 +395,96 @@ textarea{
 .seasonBox li{margin:4px 0}
 .bottomNav{display:none!important}
 body{padding-bottom:24px}
+
+/* Okinawa Techo Plus v4 */
+.cover{
+  min-height:58vh;
+  background:
+    radial-gradient(circle at 75% 12%, rgba(239,210,128,.12), transparent 24%),
+    linear-gradient(135deg, rgba(255,255,255,.055) 0 1px, transparent 1px 8px),
+    linear-gradient(45deg, rgba(255,255,255,.035) 0 1px, transparent 1px 7px),
+    #070706!important;
+  position:relative;
+  overflow:hidden;
+}
+.cover::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    repeating-linear-gradient(34deg, rgba(255,255,255,.045) 0 2px, transparent 2px 11px),
+    repeating-linear-gradient(124deg, rgba(255,255,255,.03) 0 2px, transparent 2px 13px);
+  opacity:.38;
+  transform:rotate(-4deg);
+}
+.cover::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 60% 18%, rgba(255,239,177,.12), transparent 18%),
+             linear-gradient(180deg, transparent, rgba(0,0,0,.45));
+}
+.coverInner{position:relative;z-index:2;width:min(920px,92%);margin:auto;padding:34px 0;}
+.coverBook{
+  min-height:420px;border-radius:28px;padding:36px 26px;
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;
+  background:radial-gradient(circle at 80% 15%, rgba(255,225,145,.12), transparent 20%),
+             linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+  border:1px solid rgba(226,189,107,.26);
+  box-shadow:inset 0 0 45px rgba(255,255,255,.045),0 22px 48px rgba(0,0,0,.45);
+}
+.foilLogo{width:176px;text-align:center;color:#e8c873;filter:drop-shadow(0 2px 0 rgba(78,51,12,.75));}
+.foilGrid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:2px solid rgba(235,201,116,.9);border-bottom:2px solid rgba(235,201,116,.9);
+  position:relative;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:48px;font-weight:900;line-height:1.2;
+  text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 14px rgba(245,219,143,.45);
+}
+.foilGrid::before{content:"";position:absolute;left:50%;top:-10px;bottom:-10px;border-left:2px solid rgba(235,201,116,.9);}
+.foilGrid span{padding:2px 10px 5px;}
+.foilYear{margin-top:12px;font-family:Georgia,serif;font-size:46px;font-weight:900;letter-spacing:.04em;color:#e9c979;text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 16px rgba(245,219,143,.38);}
+.plusBadge{margin-top:auto;align-self:flex-start;display:inline-block;background:rgba(10,10,10,.74);border:1px solid rgba(232,200,115,.55);color:#f0d484;border-radius:999px;padding:9px 15px;font-weight:900;letter-spacing:.06em;}
+.tagline{align-self:flex-start;color:#eee!important;margin:12px 0 0!important;font-size:16px!important;line-height:1.7!important;text-align:left;}
+.startBtn{align-self:flex-start;background:linear-gradient(180deg,#f3d889,#b8862d)!important;color:#111!important;box-shadow:0 8px 22px rgba(0,0,0,.38);}
+.seasonBox .small{color:#b3873d;}
+.seasonBox li{border-bottom:1px dashed rgba(111,63,42,.18);padding-bottom:6px;}
+.seasonBox li:last-child{border-bottom:0;}
+@media(max-width:520px){.coverBook{min-height:390px;padding:28px 22px}.foilLogo{width:150px}.foilGrid{font-size:42px}.foilYear{font-size:40px}}
+
+
+.installGuide{
+  margin:18px 0 10px;
+  background:linear-gradient(135deg,#fffdf8,#f5efe2);
+  border:1px solid rgba(201,164,91,.35);
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+.installIcon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:#111;
+  color:#f0d484;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
+}
+.installTitle{
+  font-weight:900;
+  color:#6f4d16;
+  margin-bottom:6px;
+  font-size:15px;
+}
+.installContent p{
+  margin:0;
+  line-height:1.7;
+  color:#5d554c;
+  font-size:13px;
+}

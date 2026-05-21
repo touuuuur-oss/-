@@ -38,8 +38,19 @@ function renderMonth(){
   monthTitle.textContent = `${m.month}月`;
   monthMeta.textContent = `${m.dialect || ""} / ${m.english || ""}`;
   seasonText.innerHTML = "";
-  const seasons = Array.isArray(m.season) && m.season.length ? m.season : (m.season ? [m.season] : ["季節暦情報を表示します。"]);
-  seasons.forEach(s => {
+  const monthEvents = [];
+  (m.days || []).forEach(d => {
+    if (d.events && d.events.length) {
+      d.events.forEach(e => monthEvents.push(`${m.month}/${d.day}　${e}`));
+    }
+  });
+  const seasons = Array.isArray(m.season) ? m.season : (m.season ? [m.season] : []);
+  const normalizedSeasons = seasons
+    .map(s => String(s).replace(/\s+/g, " ").trim())
+    .filter(s => s && !/^[\d〜～\/\-\(\)）]+$/.test(s));
+  const list = [...monthEvents, ...normalizedSeasons.map(s => `季節暦　${s}`)];
+  const finalList = list.length ? list : ["今月の行事・季節暦情報はありません。"];
+  finalList.forEach(s => {
     const li = document.createElement("li");
     li.textContent = s;
     seasonText.appendChild(li);

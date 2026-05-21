@@ -9,18 +9,34 @@
 <body>
 <header class="cover">
   <div class="coverInner">
-    <div class="brand">OKINAWA TECHO DIGITAL</div>
-    <div class="goldFrame">
-      <div class="kana">まじゅん果報さびら</div>
-      <h1>沖縄手帳</h1>
-      <div class="year">2027 WEB PREVIEW</div>
-      <p>旧暦・六曜・沖縄行事を、スマホで読みやすく。</p>
+    <div class="coverBook">
+      <div class="foilLogo">
+        <div class="foilGrid">
+          <span>沖</span><span>縄</span>
+          <span>手</span><span>帳</span>
+        </div>
+        <div class="foilYear">2027</div>
+      </div>
+      <div class="plusBadge">沖縄手帳＋</div>
+      <p class="tagline">旧暦・六曜・沖縄行事を、毎日の予定に。</p>
       <a href="#app" class="startBtn">手帳を開く</a>
     </div>
   </div>
 </header>
 
 <main id="app" class="app">
+
+<section class="installGuide">
+  <div class="installIcon">📱</div>
+  <div class="installContent">
+    <div class="installTitle">ホーム画面に追加すると便利です</div>
+    <p>
+      iPhone：Safariの共有ボタン →「ホーム画面に追加」<br>
+      Android：Chromeメニュー →「ホーム画面に追加」
+    </p>
+  </div>
+</section>
+
   <section class="monthHeader">
     <div class="monthNav">
       <button id="prevMonth" type="button">‹ 前月</button>
@@ -50,7 +66,7 @@
   <section id="calendarGrid" class="calendarGrid"></section>
 
   <section class="seasonBox">
-    <div class="small">沖縄季節暦</div>
+    <div class="small">今月の行事・季節暦</div>
     <ul id="seasonText"></ul>
   </section>
 
