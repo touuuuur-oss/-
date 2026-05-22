@@ -30,6 +30,11 @@ function weekdayMondayFirst(year, month, day){
   return (js + 6) % 7; // 0 Mon
 }
 
+function isHolidayLike(d){
+  const text = ((d.events || []).join(" "));
+  return /元日|成人の日|建国記念の日|天皇誕生日|春分の日|昭和の日|憲法記念日|みどりの日|こどもの日|海の日|山の日|敬老の日|秋分の日|スポーツの日|文化の日|勤労感謝の日|振替休日/.test(text);
+}
+
 function renderMonth(){
   const m = DATA[currentMonthIndex];
   if(!m) return;
@@ -38,19 +43,21 @@ function renderMonth(){
   monthTitle.textContent = `${m.month}月`;
   monthMeta.textContent = `${m.dialect || ""} / ${m.english || ""}`;
   seasonText.innerHTML = "";
-  const monthEvents = [];
-  (m.days || []).forEach(d => {
-    if (d.events && d.events.length) {
-      d.events.forEach(e => monthEvents.push(`${m.month}/${d.day}　${e}`));
+  const list = [];
+  const monthEvents = Array.isArray(m.monthEvents) ? m.monthEvents : [];
+  monthEvents.forEach(ev => {
+    if (ev.day) list.push(`${m.month}/${ev.day}　${ev.text}`);
+  });
+
+  const seasons = Array.isArray(m.season) ? m.season : (m.season ? [m.season] : []);
+  seasons.forEach(s => {
+    const text = String(s).replace(/\s+/g, " ").trim();
+    if (text && !/^[\d〜～\/\-\(\)（）]+$/.test(text)) {
+      list.push(`季節暦　${text}`);
     }
   });
-  const seasons = Array.isArray(m.season) ? m.season : (m.season ? [m.season] : []);
-  const normalizedSeasons = seasons
-    .map(s => String(s).replace(/\s+/g, " ").trim())
-    .filter(s => s && !/^[\d〜～\/\-\(\)）]+$/.test(s));
-  const list = [...monthEvents, ...normalizedSeasons.map(s => `季節暦　${s}`)];
-  const finalList = list.length ? list : ["今月の行事・季節暦情報はありません。"];
-  finalList.forEach(s => {
+
+  (list.length ? list : ["今月の行事・季節暦情報はありません。"]).forEach(s => {
     const li = document.createElement("li");
     li.textContent = s;
     seasonText.appendChild(li);
@@ -73,7 +80,7 @@ function renderMonth(){
     const d = byDay[day] || { day, lunar:"", rokuyo:"", zodiac:"", events:[] };
     const cell = document.createElement("button");
     const wd = new Date(m.year, m.month-1, day).getDay();
-    cell.className = "dayCell" + (wd===0 ? " sun" : wd===6 ? " sat" : "");
+    cell.className = "dayCell" + (wd===0 || isHolidayLike(d) ? " sun" : wd===6 ? " sat" : "");
     cell.innerHTML = `
       <span class="dayNum">${day}</span>
       <span class="lunarMini">${d.lunar || ""}</span>

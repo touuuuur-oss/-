@@ -488,3 +488,43 @@ body{padding-bottom:24px}
   color:#5d554c;
   font-size:13px;
 }
+
+/* v5 UX corrections */
+.startBtn{display:none!important}
+.coverTitleBlock{
+  text-align:right;
+  color:#e8c873;
+  text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 16px rgba(245,219,143,.45);
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+}
+.coverMainTitle{
+  font-size:clamp(46px,14vw,86px);
+  font-weight:900;
+  letter-spacing:.10em;
+  line-height:1.05;
+}
+.coverYear{
+  margin-top:6px;
+  font-family:Georgia,serif;
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+.foilLogo,.foilGrid,.foilYear{display:none!important}
+.plusBadge{
+  margin-top:auto!important;
+  align-self:flex-start!important;
+  font-size:16px;
+}
+.weekHeader div:nth-child(1),
+.weekHeader div:nth-child(2),
+.weekHeader div:nth-child(3),
+.weekHeader div:nth-child(4),
+.weekHeader div:nth-child(5){color:#222!important}
+.weekHeader div:nth-child(6){color:var(--blue)!important}
+.weekHeader div:nth-child(7){color:var(--red)!important}
+.dayCell.sun .dayNum{color:var(--red)!important}
+.dayCell.sat .dayNum{color:var(--blue)!important}
+.dayCell:not(.sun):not(.sat) .dayNum{color:#222!important}
+.installContent p{font-size:12.5px!important}
+.seasonBox li{line-height:1.55}
