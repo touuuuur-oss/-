@@ -639,3 +639,229 @@ textarea{
     font-size:40px!important;
   }
 }
+
+/* v4: generated mockup style hero */
+.topHeader{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  background:#fff;
+  color:#111;
+  border-bottom:1px solid rgba(0,0,0,.05);
+  font-weight:900;
+  position:relative;
+  z-index:5;
+}
+.topBrand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:24px;
+}
+.hibiscus{font-size:24px}
+.menuLabel{font-size:15px;letter-spacing:.05em}
+.heroBright{
+  position:relative!important;
+  overflow:hidden!important;
+  background:#d9f2ff!important;
+  color:#111!important;
+}
+.heroBright .hero-bg{
+  position:absolute!important;
+  inset:0!important;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.74) 42%, rgba(255,255,255,.12) 100%),
+    radial-gradient(circle at 20% 95%, rgba(225,38,22,.55), transparent 16%),
+    radial-gradient(circle at 74% 72%, rgba(15,120,50,.28), transparent 20%),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop") center/cover!important;
+}
+.heroBrightInner{
+  position:relative!important;
+  z-index:2!important;
+  width:min(1180px,92%)!important;
+  min-height:620px!important;
+  display:grid!important;
+  grid-template-columns:1.05fr .95fr!important;
+  align-items:center!important;
+  gap:28px!important;
+  padding:58px 0!important;
+}
+.hero-kicker{
+  margin:0 0 16px!important;
+  color:#111!important;
+  font-weight:800!important;
+  font-size:18px!important;
+  letter-spacing:.02em!important;
+}
+.heroTitle{
+  color:#111!important;
+  white-space:nowrap!important;
+  margin:0!important;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif!important;
+  font-size:clamp(48px,7vw,82px)!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  line-height:1.05!important;
+  text-shadow:none!important;
+}
+.heroTitle span{
+  color:#bc8b2e!important;
+  display:inline!important;
+  margin-left:.16em!important;
+}
+.goldLine{
+  width:min(560px,92%);
+  height:1px;
+  background:linear-gradient(90deg,#cfa85a,transparent);
+  margin:18px 0!important;
+}
+.lead{
+  color:#111!important;
+  font-size:clamp(22px,3vw,30px)!important;
+  font-weight:900!important;
+  margin:0 0 28px!important;
+}
+.feature-icons{
+  display:grid!important;
+  grid-template-columns:repeat(4,96px)!important;
+  gap:18px!important;
+  margin:28px 0 36px!important;
+}
+.feature-icons div{
+  text-align:center!important;
+}
+.feature-icons span{
+  width:74px!important;
+  height:74px!important;
+  border:1.5px solid #c49a45!important;
+  border-radius:50%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0 auto 8px!important;
+  color:#bd8b2d!important;
+  background:rgba(255,255,255,.72)!important;
+  font-size:32px!important;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif!important;
+  box-shadow:0 8px 18px rgba(0,0,0,.08)!important;
+}
+.feature-icons b{
+  color:#111!important;
+  font-size:15px!important;
+}
+.hero-bottom-copy{
+  color:#111!important;
+  font-weight:700!important;
+  font-size:17px!important;
+  line-height:1.8!important;
+}
+.bookHero{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.bookStand{
+  width:min(310px,62vw)!important;
+  height:430px!important;
+  border-radius:6px!important;
+  overflow:hidden!important;
+  background:#111!important;
+  box-shadow:0 28px 58px rgba(0,0,0,.35)!important;
+  border:1px solid rgba(0,0,0,.35)!important;
+  transform:perspective(900px) rotateY(-4deg)!important;
+}
+.bookStand img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+}
+.shisaMark{
+  position:absolute;
+  left:0;
+  bottom:68px;
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  background:rgba(120,66,22,.55);
+  color:rgba(255,255,255,.66);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:46px;
+  font-weight:900;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  box-shadow:0 16px 30px rgba(0,0,0,.22);
+}
+.scrollMark{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:36px;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.techo-visual,.visual-card,.phone-shell,.phone-screen,.book-mini,.cover-card,.cover-frame{display:none!important}
+
+/* detail panel: backdrop + swipe cue */
+.detailBackdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.18);
+  opacity:0;
+  pointer-events:none;
+  transition:.22s ease;
+  z-index:49;
+}
+.detailBackdrop.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.detailPanel{
+  touch-action:pan-y;
+}
+.handle{
+  width:54px!important;
+  height:6px!important;
+}
+@media(max-width:780px){
+  .topHeader{height:56px;padding:0 16px}
+  .topBrand{font-size:20px}
+  .menuLabel{font-size:13px}
+  .heroBrightInner{
+    grid-template-columns:1fr!important;
+    min-height:auto!important;
+    padding:36px 0 32px!important;
+  }
+  .feature-icons{
+    grid-template-columns:repeat(4,1fr)!important;
+    gap:8px!important;
+  }
+  .feature-icons span{
+    width:58px!important;
+    height:58px!important;
+    font-size:24px!important;
+  }
+  .feature-icons b{font-size:12px!important}
+  .bookStand{
+    width:min(210px,52vw)!important;
+    height:292px!important;
+  }
+  .shisaMark{
+    width:72px;
+    height:72px;
+    font-size:34px;
+    left:8px;
+    bottom:44px;
+  }
+}
+@media(max-width:430px){
+  .heroTitle{font-size:38px!important}
+  .hero-kicker{font-size:14px!important}
+  .lead{font-size:20px!important}
+}

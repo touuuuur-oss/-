@@ -9,48 +9,47 @@
 </head>
 <body>
 
-<header class="hero">
+<header class="topHeader">
+  <div class="topBrand">
+    <span class="hibiscus">🌺</span>
+    <span>沖縄手帳＋ 2027</span>
+  </div>
+  <div class="menuLabel">☰ メニュー</div>
+</header>
+
+<section class="hero heroBright">
   <div class="hero-bg"></div>
 
-  <div class="hero-inner">
+  <div class="hero-inner heroBrightInner">
     <section class="hero-copy">
-      <div class="label">OKINAWA TECHO WEB APP</div>
+      <p class="hero-kicker">沖縄の暮らしに、よりそう一冊をスマホで。</p>
       <h1 class="heroTitle">沖縄手帳＋ <span>2027</span></h1>
+      <div class="goldLine"></div>
       <p class="lead">いつもの沖縄手帳を、スマホでも。</p>
-      <p class="sub">
-        旧暦・六曜・沖縄行事・季節暦を、毎日の予定と一緒に。
-        紙の沖縄手帳の価値を、スマホで見やすく持ち歩けます。
+
+      <div class="feature-icons">
+        <div><span>☾</span><b>旧暦</b></div>
+        <div><span>✿</span><b>六曜</b></div>
+        <div><span>守</span><b>沖縄行事</b></div>
+        <div><span>葉</span><b>季節暦</b></div>
+      </div>
+
+      <p class="sub hero-bottom-copy">
+        沖縄の文化・行事・暮らしの知恵を、<br>
+        毎日の予定に。
       </p>
+    </section>
 
-      <div class="feature-row">
-        <div>旧暦</div>
-        <div>六曜</div>
-        <div>沖縄行事</div>
-        <div>季節暦</div>
+    <section class="bookHero" aria-label="沖縄手帳実物イメージ">
+      <div class="bookStand">
+        <img src="assets/okinawa-techo-cover.jpeg" alt="沖縄手帳 実物カバー">
       </div>
     </section>
 
-    <section class="techo-visual" aria-label="沖縄手帳実物イメージ">
-      <div class="visual-card">
-        <div class="phone-shell">
-          <div class="phone-screen">
-            <div class="screen-top">沖縄手帳＋</div>
-            <div class="screen-month">1月</div>
-            <div class="screen-grid">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-mini">
-          <img src="assets/okinawa-techo-cover.jpeg" alt="沖縄手帳 実物カバー">
-        </div>
-      </div>
-      <p class="visual-caption">実物の沖縄手帳をベースにしたWeb版プレ</p>
-    </section>
+    <div class="shisaMark">獅</div>
+    <div class="scrollMark">⌄</div>
   </div>
-</header>
+</section>
 
 <main id="app" class="app">
 
@@ -98,6 +97,7 @@
     <ul id="seasonText"></ul>
   </section>
 
+  <div id="detailBackdrop" class="detailBackdrop"></div>
   <section id="detailPanel" class="detailPanel">
     <div class="handle"></div>
     <div class="detailHead">

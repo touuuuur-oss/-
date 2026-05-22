@@ -137,3 +137,56 @@ document.getElementById("todayBtn").onclick = () => {
   renderMonth();
 };
 renderMonth();
+
+
+// Detail panel UX: backdrop tap + swipe/down drag to close
+(function(){
+  const panel = document.getElementById("detailPanel");
+  const backdrop = document.getElementById("detailBackdrop");
+  if(!panel || !backdrop) return;
+
+  const originalOpen = window.openDetail;
+  if (typeof openDetail === "function") {
+    window.openDetail = function(d){
+      originalOpen(d);
+      backdrop.classList.add("open");
+    }
+  }
+
+  function closeDetailPanel(){
+    panel.classList.remove("open");
+    backdrop.classList.remove("open");
+  }
+
+  backdrop.addEventListener("click", closeDetailPanel);
+  const closeBtn = document.getElementById("closeDetail");
+  if(closeBtn) closeBtn.addEventListener("click", closeDetailPanel);
+
+  let startY = 0;
+  let currentY = 0;
+  let dragging = false;
+
+  panel.addEventListener("touchstart", (e) => {
+    startY = e.touches[0].clientY;
+    currentY = startY;
+    dragging = true;
+  }, {passive:true});
+
+  panel.addEventListener("touchmove", (e) => {
+    if(!dragging) return;
+    currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    if(diff > 0 && panel.scrollTop <= 0){
+      panel.style.transform = `translateY(${Math.min(diff, 160)}px)`;
+    }
+  }, {passive:true});
+
+  panel.addEventListener("touchend", () => {
+    const diff = currentY - startY;
+    panel.style.transform = "";
+    dragging = false;
+    if(diff > 90 && panel.scrollTop <= 4){
+      closeDetailPanel();
+    }
+  });
+})();
