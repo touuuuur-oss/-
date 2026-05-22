@@ -1,131 +1,256 @@
 :root{
-  --black:#11100f;
-  --gold:#c9a45b;
+  --black:#070707;
+  --navy:#071b33;
+  --gold:#d2aa5b;
+  --gold2:#f2d68a;
+  --bg:#f5f1e8;
   --paper:#fffdf8;
-  --bg:#f4f1e9;
   --ink:#222;
-  --muted:#6f675d;
-  --line:#ded5c8;
-  --red:#c93228;
-  --blue:#1f5a9f;
+  --muted:#6a6258;
+  --line:#e2d8c8;
+  --red:#d12d2a;
+  --blue:#145da0;
   --brown:#6f3f2a;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-  padding-bottom:74px;
 }
-.cover{
-  min-height:48vh;
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:#071426;
+  color:white;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
   background:
-    linear-gradient(rgba(0,0,0,.76),rgba(0,0,0,.76)),
-    radial-gradient(circle at 20% 0%, rgba(201,164,91,.22), transparent 32%),
-    #111;
-  color:#fff;
-  display:flex;
-  align-items:center;
+    linear-gradient(90deg, rgba(6,14,26,.96) 0%, rgba(6,20,38,.82) 45%, rgba(6,20,38,.38) 100%),
+    radial-gradient(circle at 78% 28%, rgba(242,214,138,.34), transparent 24%),
+    linear-gradient(180deg, rgba(255,255,255,.05), transparent),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop") center/cover;
 }
-.coverInner{
-  width:min(900px,90%);
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:min(1180px,92%);
   margin:auto;
-  padding:42px 0;
+  min-height:620px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  align-items:center;
+  gap:42px;
+  padding:56px 0;
 }
-.brand,.small{
-  color:var(--gold);
+.label{
+  display:inline-flex;
+  border:1px solid rgba(210,170,91,.62);
+  color:var(--gold2);
+  border-radius:999px;
+  padding:8px 13px;
   font-size:12px;
   font-weight:900;
-  letter-spacing:.14em;
+  letter-spacing:.12em;
+  background:rgba(0,0,0,.32);
 }
-.cover h1{
+h1{
+  margin:24px 0 0;
   font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:clamp(42px,12vw,78px);
-  line-height:1.08;
-  margin:14px 0;
-  color:#e5c477;
+  font-size:clamp(48px,9vw,86px);
+  letter-spacing:.04em;
+  line-height:1.05;
+  text-shadow:0 2px 18px rgba(0,0,0,.42);
 }
-.cover p{
-  color:#eee;
-  line-height:1.8;
+h1 span{
+  color:var(--gold2);
+}
+.lead{
+  margin:24px 0 0;
+  font-size:clamp(22px,4vw,34px);
+  font-weight:900;
+  line-height:1.5;
+}
+.sub{
+  max-width:620px;
+  color:#f5f5f5;
+  line-height:1.9;
   font-size:16px;
 }
-.startBtn{
-  display:inline-block;
-  margin-top:20px;
-  background:linear-gradient(180deg,#e2bf72,#a8792f);
-  color:#fff;
-  text-decoration:none;
-  border-radius:14px;
-  padding:15px 22px;
+.feature-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:34px;
+  max-width:620px;
+}
+.feature-row div{
+  border:1px solid rgba(210,170,91,.72);
+  color:var(--gold2);
+  border-radius:18px;
+  padding:17px 8px;
+  background:rgba(2,15,31,.64);
+  text-align:center;
   font-weight:900;
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+}
+.cover-card{
+  display:flex;
+  justify-content:center;
+}
+.cover-frame{
+  position:relative;
+  width:min(340px,80vw);
+  border-radius:34px;
+  padding:12px;
+  background:linear-gradient(145deg,rgba(242,214,138,.9),rgba(55,36,11,.9));
+  box-shadow:0 28px 60px rgba(0,0,0,.46);
+}
+.cover-frame img{
+  display:block;
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  border-radius:24px;
+  background:#111;
 }
 .app{
-  width:min(760px,94%);
-  margin:0 auto;
-  padding:18px 0 40px;
+  width:min(780px,94%);
+  margin:auto;
+  padding:18px 0 56px;
 }
-.monthHeader{
+.installGuide{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:white;
+  border:1px solid rgba(210,170,91,.32);
+  border-radius:22px;
+  padding:16px;
+  margin:18px 0;
+  box-shadow:0 10px 26px rgba(0,0,0,.05);
+}
+.installIcon{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:var(--navy);
+  color:var(--gold2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  flex-shrink:0;
+}
+.installGuide h2{
+  margin:0 0 6px;
+  font-size:17px;
+}
+.installGuide p{
+  margin:0;
+  line-height:1.75;
+  color:var(--muted);
+  font-size:13px;
+}
+.monthPanel{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:15px;
+  box-shadow:0 8px 24px rgba(80,55,20,.06);
+}
+.monthNav{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-bottom:16px;
+}
+.monthNav button{
+  border:none;
+  background:var(--navy);
+  color:white;
+  border-radius:13px;
+  padding:12px 8px;
+  font-weight:900;
+}
+.monthTitleArea{
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
   gap:12px;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:18px;
-  margin-top:16px;
 }
-.monthHeader h2{
+.small{
+  color:#b98a35;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.monthTitleArea h2{
   margin:6px 0 0;
-  font-size:38px;
+  font-size:40px;
   line-height:1;
 }
-.monthHeader p{
+.monthTitleArea p{
   margin:8px 0 0;
+  font-weight:800;
   color:var(--muted);
-  font-weight:700;
 }
 select{
   border:1px solid var(--line);
   border-radius:12px;
-  background:#fff;
   padding:10px 12px;
-  font-weight:800;
+  background:white;
+  font-weight:900;
 }
-.seasonBox{
-  background:#fffaf0;
+.legendBox{
+  display:flex;
+  gap:16px;
+  background:white;
   border:1px solid var(--line);
   border-radius:18px;
-  padding:14px 16px;
+  padding:12px 14px;
   margin:12px 0;
-}
-.seasonBox p{
-  margin:6px 0 0;
-  color:#5f554a;
-  line-height:1.6;
   font-size:13px;
+  font-weight:900;
 }
+.legendBox div{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+.dot.gold{background:var(--gold)}
+.dot.black{background:#111}
 .weekHeader{
   display:grid;
   grid-template-columns:repeat(7,1fr);
   gap:6px;
-  margin:10px 0 6px;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:900;
+  margin:12px 0 6px;
+  font-size:13px;
+  font-weight:950;
   text-align:center;
 }
+.weekHeader div:nth-child(-n+5){color:#222}
+.weekHeader div:nth-child(6){color:var(--blue)}
+.weekHeader div:nth-child(7){color:var(--red)}
 .calendarGrid{
   display:grid;
   grid-template-columns:repeat(7,1fr);
   gap:6px;
 }
 .dayCell{
-  min-height:70px;
+  min-height:76px;
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:16px;
   background:var(--paper);
   padding:8px 4px;
   text-align:center;
@@ -137,7 +262,7 @@ select{
   align-items:center;
 }
 .dayCell.empty{
-  opacity:.35;
+  opacity:.38;
   cursor:default;
   background:#eee8dc;
 }
@@ -145,55 +270,65 @@ select{
   display:block;
   width:100%;
   text-align:center;
-  font-size:22px;
+  font-size:23px;
   font-weight:950;
   line-height:1;
-  margin-top:2px;
 }
 .dayCell.sun .dayNum{color:var(--red)}
 .dayCell.sat .dayNum{color:var(--blue)}
+.dayCell:not(.sun):not(.sat) .dayNum{color:#222}
 .lunarMini{
   display:block;
-  margin-top:6px;
-  font-size:10px;
+  max-width:100%;
+  margin-top:7px;
   color:var(--brown);
+  font-size:10px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width:100%;
   text-align:center;
 }
-.eventDot{
+.eventDot,.memoDot{
   position:absolute;
-  right:6px;
-  bottom:6px;
+  bottom:7px;
   width:7px;
   height:7px;
-  background:var(--gold);
   border-radius:50%;
 }
-.memoDot{
-  position:absolute;
-  left:6px;
-  bottom:6px;
-  width:7px;
-  height:7px;
-  background:#222;
-  border-radius:50%;
+.eventDot{right:7px;background:var(--gold)}
+.memoDot{left:7px;background:#111}
+.monthlyInfo{
+  margin-top:18px;
+  background:#fffaf0;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:16px;
 }
+.monthlyInfo ul{
+  margin:10px 0 0;
+  padding-left:20px;
+  color:#5f554a;
+  line-height:1.65;
+  font-size:14px;
+}
+.monthlyInfo li{
+  padding:5px 0;
+  border-bottom:1px dashed rgba(111,63,42,.18);
+}
+.monthlyInfo li:last-child{border-bottom:0}
 .detailPanel{
   position:fixed;
   left:0;
   right:0;
   bottom:-100%;
-  background:#fff;
-  border-radius:24px 24px 0 0;
-  box-shadow:0 -12px 40px rgba(0,0,0,.22);
-  padding:10px 18px 22px;
   z-index:50;
-  transition:.25s ease;
   max-height:82vh;
   overflow:auto;
+  background:white;
+  border-radius:26px 26px 0 0;
+  padding:10px 18px 24px;
+  box-shadow:0 -12px 44px rgba(0,0,0,.25);
+  transition:.25s ease;
 }
 .detailPanel.open{bottom:0}
 .handle{
@@ -252,9 +387,7 @@ select{
   margin:8px 0 0;
   padding-left:20px;
 }
-.eventBox li{
-  margin:4px 0;
-}
+.eventBox li{margin:4px 0}
 .memoLabel{
   display:block;
   margin:14px 0 8px;
@@ -272,259 +405,33 @@ textarea{
   width:100%;
   margin-top:10px;
   border:none;
-  background:#111;
-  color:#fff;
+  background:var(--navy);
+  color:white;
   border-radius:14px;
   padding:14px;
   font-weight:900;
   font-size:16px;
 }
-.bottomNav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  height:64px;
-  background:#111;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:1px;
-  z-index:40;
-}
-.bottomNav button{
-  background:#111;
-  color:#fff;
-  border:none;
-  font-weight:900;
-  font-size:15px;
-}
-@media(min-width:800px){
-  .detailPanel{
-    width:720px;
-    margin:auto;
-    left:0;
-    right:0;
+@media(max-width:780px){
+  .hero-inner{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:42px 0 38px;
   }
-  .dayCell{min-height:92px}
+  .feature-row{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .cover-frame{
+    width:min(270px,72vw);
+  }
+  .cover-frame img{
+    height:390px;
+  }
 }
-
-/* v2 refinements */
-.cover{
-  min-height:56vh;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(232,204,130,.18), transparent 34%),
-    repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 1px, transparent 1px 5px),
-    linear-gradient(135deg,#050505,#151311 55%,#050505);
+@media(min-width:820px){
+  .detailPanel{
+    width:760px;
+    margin:auto;
+  }
+  .dayCell{min-height:94px}
 }
-.coverInner{padding:34px 0}
-.goldFrame{
-  border:1px solid rgba(201,164,91,.55);
-  border-radius:24px;
-  padding:28px 22px;
-  text-align:center;
-  box-shadow:inset 0 0 40px rgba(201,164,91,.08);
-}
-.kana{
-  color:#e6d29a;
-  letter-spacing:.12em;
-  font-weight:800;
-  margin-bottom:10px;
-}
-.cover h1{
-  font-size:clamp(54px,15vw,92px);
-  line-height:1.02;
-  margin:8px 0;
-  letter-spacing:.08em;
-}
-.year{
-  color:#e6d29a;
-  letter-spacing:.22em;
-  font-size:13px;
-  font-weight:900;
-}
-.monthHeader{
-  display:block;
-  padding:14px;
-  box-shadow:0 8px 22px rgba(63,43,20,.07);
-}
-.monthNav{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-  margin-bottom:14px;
-}
-.monthNav button{
-  background:#111;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  padding:11px 8px;
-  font-weight:900;
-}
-.monthTitleRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:12px;
-}
-.legendBox{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:10px 12px;
-  margin:12px 0;
-  font-size:13px;
-  font-weight:800;
-  color:#5d554c;
-}
-.legendItem{display:flex;align-items:center;gap:6px}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
-.dot.gold{background:var(--gold)}
-.dot.black{background:#111}
-.seasonBox{margin:16px 0 0}
-.seasonBox ul{
-  margin:8px 0 0;
-  padding-left:20px;
-  color:#5f554a;
-  line-height:1.6;
-  font-size:13px;
-}
-.seasonBox li{margin:4px 0}
-.bottomNav{display:none!important}
-body{padding-bottom:24px}
-
-/* Okinawa Techo Plus v4 */
-.cover{
-  min-height:58vh;
-  background:
-    radial-gradient(circle at 75% 12%, rgba(239,210,128,.12), transparent 24%),
-    linear-gradient(135deg, rgba(255,255,255,.055) 0 1px, transparent 1px 8px),
-    linear-gradient(45deg, rgba(255,255,255,.035) 0 1px, transparent 1px 7px),
-    #070706!important;
-  position:relative;
-  overflow:hidden;
-}
-.cover::before{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  background:
-    repeating-linear-gradient(34deg, rgba(255,255,255,.045) 0 2px, transparent 2px 11px),
-    repeating-linear-gradient(124deg, rgba(255,255,255,.03) 0 2px, transparent 2px 13px);
-  opacity:.38;
-  transform:rotate(-4deg);
-}
-.cover::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 60% 18%, rgba(255,239,177,.12), transparent 18%),
-             linear-gradient(180deg, transparent, rgba(0,0,0,.45));
-}
-.coverInner{position:relative;z-index:2;width:min(920px,92%);margin:auto;padding:34px 0;}
-.coverBook{
-  min-height:420px;border-radius:28px;padding:36px 26px;
-  display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;
-  background:radial-gradient(circle at 80% 15%, rgba(255,225,145,.12), transparent 20%),
-             linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
-  border:1px solid rgba(226,189,107,.26);
-  box-shadow:inset 0 0 45px rgba(255,255,255,.045),0 22px 48px rgba(0,0,0,.45);
-}
-.foilLogo{width:176px;text-align:center;color:#e8c873;filter:drop-shadow(0 2px 0 rgba(78,51,12,.75));}
-.foilGrid{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:2px solid rgba(235,201,116,.9);border-bottom:2px solid rgba(235,201,116,.9);
-  position:relative;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size:48px;font-weight:900;line-height:1.2;
-  text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 14px rgba(245,219,143,.45);
-}
-.foilGrid::before{content:"";position:absolute;left:50%;top:-10px;bottom:-10px;border-left:2px solid rgba(235,201,116,.9);}
-.foilGrid span{padding:2px 10px 5px;}
-.foilYear{margin-top:12px;font-family:Georgia,serif;font-size:46px;font-weight:900;letter-spacing:.04em;color:#e9c979;text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 16px rgba(245,219,143,.38);}
-.plusBadge{margin-top:auto;align-self:flex-start;display:inline-block;background:rgba(10,10,10,.74);border:1px solid rgba(232,200,115,.55);color:#f0d484;border-radius:999px;padding:9px 15px;font-weight:900;letter-spacing:.06em;}
-.tagline{align-self:flex-start;color:#eee!important;margin:12px 0 0!important;font-size:16px!important;line-height:1.7!important;text-align:left;}
-.startBtn{align-self:flex-start;background:linear-gradient(180deg,#f3d889,#b8862d)!important;color:#111!important;box-shadow:0 8px 22px rgba(0,0,0,.38);}
-.seasonBox .small{color:#b3873d;}
-.seasonBox li{border-bottom:1px dashed rgba(111,63,42,.18);padding-bottom:6px;}
-.seasonBox li:last-child{border-bottom:0;}
-@media(max-width:520px){.coverBook{min-height:390px;padding:28px 22px}.foilLogo{width:150px}.foilGrid{font-size:42px}.foilYear{font-size:40px}}
-
-
-.installGuide{
-  margin:18px 0 10px;
-  background:linear-gradient(135deg,#fffdf8,#f5efe2);
-  border:1px solid rgba(201,164,91,.35);
-  border-radius:18px;
-  padding:14px;
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  box-shadow:0 8px 20px rgba(0,0,0,.05);
-}
-.installIcon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  background:#111;
-  color:#f0d484;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  flex-shrink:0;
-}
-.installTitle{
-  font-weight:900;
-  color:#6f4d16;
-  margin-bottom:6px;
-  font-size:15px;
-}
-.installContent p{
-  margin:0;
-  line-height:1.7;
-  color:#5d554c;
-  font-size:13px;
-}
-
-/* v5 UX corrections */
-.startBtn{display:none!important}
-.coverTitleBlock{
-  text-align:right;
-  color:#e8c873;
-  text-shadow:0 1px 0 #fff0b8,0 2px 0 #8d6922,0 0 16px rgba(245,219,143,.45);
-  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
-}
-.coverMainTitle{
-  font-size:clamp(46px,14vw,86px);
-  font-weight:900;
-  letter-spacing:.10em;
-  line-height:1.05;
-}
-.coverYear{
-  margin-top:6px;
-  font-family:Georgia,serif;
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:.06em;
-}
-.foilLogo,.foilGrid,.foilYear{display:none!important}
-.plusBadge{
-  margin-top:auto!important;
-  align-self:flex-start!important;
-  font-size:16px;
-}
-.weekHeader div:nth-child(1),
-.weekHeader div:nth-child(2),
-.weekHeader div:nth-child(3),
-.weekHeader div:nth-child(4),
-.weekHeader div:nth-child(5){color:#222!important}
-.weekHeader div:nth-child(6){color:var(--blue)!important}
-.weekHeader div:nth-child(7){color:var(--red)!important}
-.dayCell.sun .dayNum{color:var(--red)!important}
-.dayCell.sat .dayNum{color:var(--blue)!important}
-.dayCell:not(.sun):not(.sat) .dayNum{color:#222!important}
-.installContent p{font-size:12.5px!important}
-.seasonBox li{line-height:1.55}
