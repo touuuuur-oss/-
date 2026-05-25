@@ -3,64 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>沖縄手帳 2027＋</title>
+  <title>沖縄手帳＋ 2027</title>
   <meta name="description" content="いつもの沖縄手帳を、スマホでも。旧暦・六曜・沖縄行事・季節暦を確認できる沖縄手帳Web版プレ。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="topHeader">
-  <div class="topBrand">
-    <span class="hibiscus">🌺</span>
-    <span>沖縄手帳＋ 2027</span>
-  </div>
-  <div class="menuLabel">☰ メニュー</div>
+<header class="appHeader">
+  <div class="brandMini">沖縄手帳＋ <span>2027</span></div>
 </header>
 
-<section class="hero heroBright">
-  <div class="hero-bg"></div>
-
-  <div class="hero-inner heroBrightInner">
-    <section class="hero-copy">
-      <p class="hero-kicker">沖縄の暮らしに、よりそう一冊をスマホで。</p>
-      <h1 class="heroTitle">沖縄手帳＋ <span>2027</span></h1>
-      <div class="goldLine"></div>
+<section class="hero">
+  <div class="heroBg"></div>
+  <div class="heroInner">
+    <div class="heroText">
+      <div class="eyebrow">OKINAWA TECHO PLUS</div>
+      <h1>沖縄手帳＋ <span>2027</span></h1>
       <p class="lead">いつもの沖縄手帳を、スマホでも。</p>
-
-      <div class="feature-icons">
-        <div><span>☾</span><b>旧暦</b></div>
-        <div><span>✿</span><b>六曜</b></div>
-        <div><span>守</span><b>沖縄行事</b></div>
-        <div><span>葉</span><b>季節暦</b></div>
+      <p class="copy">旧暦・六曜・沖縄行事・季節暦を、毎日の予定と一緒に。沖縄の暮らしに寄り添う、Web版プレです。</p>
+      <div class="featurePills">
+        <div>旧暦</div><div>六曜</div><div>沖縄行事</div><div>季節暦</div>
       </div>
-
-      <p class="sub hero-bottom-copy">
-        沖縄の文化・行事・暮らしの知恵を、<br>
-        毎日の予定に。
-      </p>
-    </section>
-
-    <section class="bookHero" aria-label="沖縄手帳実物イメージ">
-      <div class="bookStand">
-        <img src="assets/okinawa-techo-cover.jpeg" alt="沖縄手帳 実物カバー">
-      </div>
-    </section>
-
-    <div class="shisaMark">獅</div>
-    <div class="scrollMark">⌄</div>
+    </div>
+    <div class="bookVisual">
+      <div class="bookGlow"></div>
+      <div class="bookCard"><img src="assets/okinawa-techo-cover.jpeg" alt="沖縄手帳 実物イメージ"></div>
+    </div>
   </div>
 </section>
 
 <main id="app" class="app">
-
-  <section class="installGuide">
+  <section class="installGuide" id="installGuide">
     <div class="installIcon">📱</div>
-    <div>
-      <h2>ホーム画面に追加して使うと便利です</h2>
-      <p>
-        iPhone：Safari下部の「共有」アイコン → 下へスクロール →「ホーム画面に追加」<br>
-        Android：Chrome右上の「︙」メニュー →「ホーム画面に追加」
-      </p>
+    <div class="installText">
+      <h2>ホーム画面に追加すると便利です</h2>
+      <p>iPhone：Safari下部の「共有」アイコン → 下へスクロール →「ホーム画面に追加」<br>Android：Chrome右上の「︙」メニュー →「ホーム画面に追加」</p>
     </div>
   </section>
 
@@ -70,7 +47,6 @@
       <button id="todayBtn" type="button">1月へ</button>
       <button id="nextMonth" type="button">次月 ›</button>
     </div>
-
     <div class="monthTitleArea">
       <div>
         <div class="small">2027 / OKINAWA TECHO＋</div>
@@ -98,6 +74,7 @@
   </section>
 
   <div id="detailBackdrop" class="detailBackdrop"></div>
+
   <section id="detailPanel" class="detailPanel">
     <div class="handle"></div>
     <div class="detailHead">
@@ -107,18 +84,15 @@
       </div>
       <button id="closeDetail" type="button">閉じる</button>
     </div>
-
     <div class="infoGrid">
       <div><span>旧暦</span><strong id="detailLunar">-</strong></div>
       <div><span>六曜</span><strong id="detailRokuyo">-</strong></div>
       <div><span>干支</span><strong id="detailZodiac">-</strong></div>
     </div>
-
     <div class="eventBox">
       <div class="small">行事・記念日</div>
       <ul id="detailEvents"></ul>
     </div>
-
     <label class="memoLabel">予定メモ</label>
     <textarea id="memo" placeholder="この日の予定やメモを入力"></textarea>
     <button id="saveMemo" class="saveBtn" type="button">この端末に保存</button>
