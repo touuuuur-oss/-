@@ -66,3 +66,12 @@ detailPanel.addEventListener("touchstart", (e) => { if(!detailPanel.classList.co
 detailPanel.addEventListener("touchmove", (e) => { if(!dragging) return; lastY = e.touches[0].clientY; const diff = lastY - startY; if(diff > 0 && detailPanel.scrollTop <= 2) detailPanel.style.transform = `translateY(${Math.min(diff, 180)}px)`; }, {passive:true});
 detailPanel.addEventListener("touchend", () => { if(!dragging) return; const diff = lastY - startY; dragging = false; detailPanel.style.transform = ""; if(diff > 80 && detailPanel.scrollTop <= 6) closePanel(); });
 renderMonth();
+
+
+// compact install helper
+const installBtn = document.querySelector('.installMini button');
+if(installBtn){
+  installBtn.addEventListener('click', () => {
+    alert('iPhone：Safariの共有ボタン → 「ホーム画面に追加」\nAndroid：Chrome右上メニュー → 「ホーム画面に追加」');
+  });
+}
