@@ -130,3 +130,197 @@
     height:205px!important;
   }
 }
+
+
+/* v8: first view smaller + returning-user compact hero */
+.heroInner{
+  min-height:300px!important;
+  padding:22px 0 14px!important;
+}
+.hero h1{
+  font-size:clamp(30px,6vw,54px)!important;
+}
+.lead{
+  font-size:clamp(17px,2.7vw,22px)!important;
+}
+.copy{
+  font-size:13.5px!important;
+}
+.featurePills{
+  margin-top:16px!important;
+}
+.bookCard{
+  width:min(170px,42vw)!important;
+  height:245px!important;
+}
+
+.installMini{
+  margin:8px 0 12px!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+}
+.installMini button{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  border:1px solid rgba(201,154,66,.28)!important;
+  background:rgba(255,255,255,.72)!important;
+  color:#7b5618!important;
+  border-radius:999px!important;
+  padding:8px 12px!important;
+  font-weight:900!important;
+  font-size:12.5px!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.04)!important;
+}
+.installMiniIcon{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:20px!important;
+  height:20px!important;
+  border-radius:50%!important;
+  background:#07243d!important;
+  color:#f0cf7b!important;
+  font-size:15px!important;
+  line-height:1!important;
+}
+
+/* 2回目以降 */
+body.returning-user .heroInner{
+  min-height:150px!important;
+  padding:14px 0 10px!important;
+  grid-template-columns:1fr auto!important;
+}
+body.returning-user .eyebrow,
+body.returning-user .copy,
+body.returning-user .featurePills{
+  display:none!important;
+}
+body.returning-user .hero h1{
+  font-size:clamp(25px,5vw,36px)!important;
+  margin:0!important;
+}
+body.returning-user .lead{
+  font-size:14px!important;
+  margin-top:8px!important;
+}
+body.returning-user .bookCard{
+  width:76px!important;
+  height:108px!important;
+  border-radius:4px!important;
+}
+body.returning-user .bookGlow{
+  display:none!important;
+}
+
+@media(max-width:780px){
+  .heroInner{
+    min-height:260px!important;
+    padding:20px 0 12px!important;
+  }
+  .bookCard{
+    width:118px!important;
+    height:172px!important;
+  }
+  body.returning-user .heroInner{
+    min-height:126px!important;
+    grid-template-columns:1fr auto!important;
+  }
+  body.returning-user .bookCard{
+    width:58px!important;
+    height:82px!important;
+  }
+}
+
+
+/* v9: monthly schedule list and compact lower layout */
+.monthListCard{
+  margin-top:12px!important;
+  background:#fffdf8!important;
+  border:1px solid var(--line)!important;
+  border-radius:20px!important;
+  padding:14px!important;
+  box-shadow:0 6px 18px rgba(80,55,20,.045)!important;
+}
+.listHeader{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin-bottom:8px!important;
+}
+.listHeader h3{
+  margin:4px 0 0!important;
+  font-size:18px!important;
+  line-height:1.2!important;
+}
+.listNote{
+  display:inline-flex!important;
+  align-items:center!important;
+  border-radius:999px!important;
+  background:#f4efe3!important;
+  color:#7b5618!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  padding:5px 8px!important;
+  white-space:nowrap!important;
+}
+.compactList{
+  list-style:none!important;
+  margin:0!important;
+  padding:0!important;
+  color:#51483f!important;
+  font-size:14px!important;
+  line-height:1.45!important;
+}
+.compactList li{
+  display:flex!important;
+  gap:8px!important;
+  align-items:flex-start!important;
+  padding:7px 0!important;
+  border-bottom:1px dashed rgba(111,63,42,.16)!important;
+}
+.compactList li:last-child{
+  border-bottom:0!important;
+}
+.compactList .listDate{
+  min-width:44px!important;
+  color:#9a6e22!important;
+  font-weight:900!important;
+  flex-shrink:0!important;
+}
+.compactList .emptyText{
+  color:#8a8178!important;
+  font-weight:800!important;
+}
+.monthlyInfo{
+  max-height:260px!important;
+  overflow:auto!important;
+}
+.monthlySchedule{
+  max-height:210px!important;
+  overflow:auto!important;
+}
+.monthlyInfo ul,
+.monthlyInfo li{
+  margin:0!important;
+  padding-left:0!important;
+}
+@media(max-width:780px){
+  .monthListCard{
+    padding:12px!important;
+    border-radius:18px!important;
+  }
+  .listHeader h3{
+    font-size:16px!important;
+  }
+  .compactList{
+    font-size:13px!important;
+  }
+  .monthlyInfo{
+    max-height:230px!important;
+  }
+  .monthlySchedule{
+    max-height:180px!important;
+  }
+}

@@ -34,7 +34,10 @@
 
 <main id="app" class="app">
   <section class="installMini" id="installGuide">
-    <button type="button">＋ ホーム画面に追加</button>
+    <button type="button" aria-label="ホーム画面への追加方法">
+      <span class="installMiniIcon">＋</span>
+      <span>ホーム画面への追加方法</span>
+    </button>
   </section>
 
   <section class="monthPanel">
@@ -64,9 +67,25 @@
 
   <section id="calendarGrid" class="calendarGrid"></section>
 
-  <section class="monthlyInfo">
-    <div class="small">今月の行事・季節暦</div>
-    <ul id="seasonText"></ul>
+  <section class="monthListCard monthlySchedule">
+    <div class="listHeader">
+      <div>
+        <div class="small">MY SCHEDULE</div>
+        <h3>今月の予定</h3>
+      </div>
+      <span class="listNote">端末保存</span>
+    </div>
+    <ul id="monthlyMemoList" class="compactList"></ul>
+  </section>
+
+  <section class="monthListCard monthlyInfo">
+    <div class="listHeader">
+      <div>
+        <div class="small">OKINAWA CALENDAR</div>
+        <h3>今月の沖縄行事・季節暦</h3>
+      </div>
+    </div>
+    <ul id="seasonText" class="compactList"></ul>
   </section>
 
   <div id="detailBackdrop" class="detailBackdrop"></div>

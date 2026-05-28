@@ -16,17 +16,53 @@ function weekdayMondayFirst(year, month, day){ const js = new Date(year, month -
 function isHolidayLike(d){ const text = ((d.events || []).join(" ")); return /元日|成人の日|建国記念の日|天皇誕生日|春分の日|昭和の日|憲法記念日|みどりの日|こどもの日|海の日|山の日|敬老の日|秋分の日|スポーツの日|文化の日|勤労感謝の日|振替休日/.test(text); }
 function openPanel(){ detailPanel.classList.add("open"); detailBackdrop.classList.add("open"); }
 function closePanel(){ detailPanel.classList.remove("open"); detailBackdrop.classList.remove("open"); detailPanel.style.transform = ""; }
+
+function renderMonthlyMemoList(m){
+  const listEl = document.getElementById("monthlyMemoList");
+  if(!listEl) return;
+  listEl.innerHTML = "";
+
+  const items = [];
+  const daysInMonth = new Date(m.year, m.month, 0).getDate();
+
+  for(let day=1; day<=daysInMonth; day++){
+    const memo = getMemo(m.month, day).trim();
+    if(memo){
+      items.push({day, memo});
+    }
+  }
+
+  if(!items.length){
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="emptyText">【予定なし】</span>`;
+    listEl.appendChild(li);
+    return;
+  }
+
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="listDate">${m.month}/${item.day}</span><span>${item.memo.replace(/\\n/g, " / ")}</span>`;
+    listEl.appendChild(li);
+  });
+}
+
 function renderMonth(){
   const m = DATA[currentMonthIndex]; if(!m) return;
   monthSelect.value = currentMonthIndex;
   monthTitle.textContent = `${m.month}月`;
   monthMeta.textContent = `${m.dialect || ""} / ${m.english || ""}`;
+  renderMonthlyMemoList(m);
   seasonText.innerHTML = "";
   const list = [];
   (m.days || []).forEach(d => { if (d.events && d.events.length) d.events.forEach(e => list.push(`${m.month}/${d.day}　${e}`)); });
   const seasons = Array.isArray(m.season) ? m.season : (m.season ? [m.season] : []);
   seasons.forEach(s => { const text = String(s).replace(/\s+/g, " ").trim(); if (text && !/^[\d〜～\/\-\(\)（）]+$/.test(text)) list.push(`季節暦　${text}`); });
-  (list.length ? list : ["今月の行事・季節暦情報はありません。"]).forEach(s => { const li = document.createElement("li"); li.textContent = s; seasonText.appendChild(li); });
+  (list.length ? list : ["今月の行事・季節暦情報はありません。"]).forEach(s => { const li = document.createElement("li"); const parts = String(s).split("　");
+    if(parts.length >= 2 && /^\d+\/\d+/.test(parts[0])){
+      li.innerHTML = `<span class="listDate">${parts[0]}</span><span>${parts.slice(1).join("　")}</span>`;
+    }else{
+      li.textContent = s;
+    } seasonText.appendChild(li); });
   calendarGrid.innerHTML = "";
   const firstBlank = weekdayMondayFirst(m.year, m.month, 1);
   for(let i=0; i<firstBlank; i++){ const empty = document.createElement("div"); empty.className = "dayCell empty"; calendarGrid.appendChild(empty); }
@@ -68,10 +104,21 @@ detailPanel.addEventListener("touchend", () => { if(!dragging) return; const dif
 renderMonth();
 
 
-// compact install helper
-const installBtn = document.querySelector('.installMini button');
-if(installBtn){
-  installBtn.addEventListener('click', () => {
-    alert('iPhone：Safariの共有ボタン → 「ホーム画面に追加」\nAndroid：Chrome右上メニュー → 「ホーム画面に追加」');
-  });
+// v8: 2回目以降はトップバナーをコンパクト表示
+(function(){
+  const key = "okinawa_techo_plus_has_visited";
+  const alreadyVisited = localStorage.getItem(key) === "1";
+  if(alreadyVisited){
+    document.body.classList.add("returning-user");
+  }else{
+    localStorage.setItem(key, "1");
+  }
+})();
+
+// v8: ホーム画面追加方法
+const installButtonV8 = document.querySelector('.installMini button');
+if(installButtonV8){
+  installButtonV8.onclick = () => {
+    alert('ホーム画面への追加方法\\n\\n【iPhone】Safari下部の共有アイコン → 下へスクロール →「ホーム画面に追加」\\n\\n【Android】Chrome右上の「︙」→「ホーム画面に追加」');
+  };
 }
