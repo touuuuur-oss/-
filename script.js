@@ -1,21 +1,146 @@
 const DATA = window.OKINAWA_TECHO_DATA || [];
 let currentMonthIndex = 0;
 let selectedDay = null;
+let saveStatusTimer = null;
+
 const monthSelect = document.getElementById("monthSelect");
 const monthTitle = document.getElementById("monthTitle");
 const monthMeta = document.getElementById("monthMeta");
+const monthBrandLine = document.getElementById("monthBrandLine");
 const seasonText = document.getElementById("seasonText");
 const calendarGrid = document.getElementById("calendarGrid");
 const detailPanel = document.getElementById("detailPanel");
 const detailBackdrop = document.getElementById("detailBackdrop");
-DATA.forEach((m, idx) => { const opt = document.createElement("option"); opt.value = idx; opt.textContent = `${m.month}月`; monthSelect.appendChild(opt); });
-function memoKey(month, day){ return `okinawa_techo_plus_memo_2027_${month}_${day}`; }
-function getMemo(month, day){ return localStorage.getItem(memoKey(month, day)) || ""; }
-function setMemo(month, day, value){ localStorage.setItem(memoKey(month, day), value); }
-function weekdayMondayFirst(year, month, day){ const js = new Date(year, month - 1, day).getDay(); return (js + 6) % 7; }
-function isHolidayLike(d){ const text = ((d.events || []).join(" ")); return /元日|成人の日|建国記念の日|天皇誕生日|春分の日|昭和の日|憲法記念日|みどりの日|こどもの日|海の日|山の日|敬老の日|秋分の日|スポーツの日|文化の日|勤労感謝の日|振替休日/.test(text); }
-function openPanel(){ detailPanel.classList.add("open"); detailBackdrop.classList.add("open"); }
-function closePanel(){ detailPanel.classList.remove("open"); detailBackdrop.classList.remove("open"); detailPanel.style.transform = ""; }
+
+const STORAGE = {
+  lastMonth: "okinawa_techo_plus_last_month_v2",
+  visited: "okinawa_techo_plus_has_visited"
+};
+
+function pad2(value){
+  return String(value).padStart(2, "0");
+}
+
+function fullDateKey(year, month, day){
+  return `${year}-${pad2(month)}-${pad2(day)}`;
+}
+
+/*
+  Full-date keys prevent collisions when future months/years are added.
+  GitHub updates do not clear localStorage as long as the same origin/domain is used.
+*/
+function memoKey(year, month, day){
+  return `okinawa_techo_plus_memo_${fullDateKey(year, month, day)}`;
+}
+
+function legacyMemo(year, month, day){
+  // Migrate old prototype data only for 2027, whose old keys hard-coded 2027.
+  if(year !== 2027) return "";
+  return (
+    localStorage.getItem(`okinawa_techo_plus_memo_2027_${month}_${day}`) ||
+    localStorage.getItem(`okinawa_techo_memo_2027_${month}_${day}`) ||
+    ""
+  );
+}
+
+function getMemo(year, month, day){
+  const key = memoKey(year, month, day);
+  const current = localStorage.getItem(key);
+  if(current !== null) return current;
+
+  const old = legacyMemo(year, month, day);
+  if(old){
+    localStorage.setItem(key, old);
+    return old;
+  }
+  return "";
+}
+
+function setMemo(year, month, day, value){
+  localStorage.setItem(memoKey(year, month, day), value);
+}
+
+function monthId(m){
+  return `${m.year}-${pad2(m.month)}`;
+}
+
+function findMonthIndex(year, month){
+  return DATA.findIndex(m => m.year === year && m.month === month);
+}
+
+function nearestTodayIndex(){
+  const now = new Date();
+  const exact = findMonthIndex(now.getFullYear(), now.getMonth() + 1);
+  if(exact >= 0) return exact;
+
+  if(!DATA.length) return 0;
+  const todayValue = now.getFullYear() * 12 + now.getMonth();
+  let best = 0;
+  let bestDistance = Infinity;
+  DATA.forEach((m, i) => {
+    const value = m.year * 12 + (m.month - 1);
+    const distance = Math.abs(value - todayValue);
+    if(distance < bestDistance){
+      bestDistance = distance;
+      best = i;
+    }
+  });
+  return best;
+}
+
+function initialMonthIndex(){
+  const saved = localStorage.getItem(STORAGE.lastMonth);
+  if(saved){
+    const idx = DATA.findIndex(m => monthId(m) === saved);
+    if(idx >= 0) return idx;
+  }
+  return nearestTodayIndex();
+}
+
+DATA.forEach((m, idx) => {
+  const opt = document.createElement("option");
+  opt.value = idx;
+  opt.textContent = `${m.year}年${m.month}月`;
+  monthSelect.appendChild(opt);
+});
+
+function weekdayMondayFirst(year, month, day){
+  const js = new Date(year, month - 1, day).getDay();
+  return (js + 6) % 7;
+}
+
+function isHolidayLike(d){
+  const text = [...(d.events || []), ...(d.seasons || [])].join(" ");
+  return /元日|元旦|成人の日|建国記念の日|天皇誕生日|春分の日|昭和の日|憲法記念日|みどりの日|こどもの日|海の日|山の日|敬老の日|秋分の日|スポーツの日|文化の日|勤労感謝の日|振替休日/.test(text);
+}
+
+function openPanel(){
+  detailPanel.classList.add("open");
+  detailBackdrop.classList.add("open");
+}
+
+function showSaveStatus(message){
+  const el = document.getElementById("saveStatus");
+  if(!el) return;
+  el.textContent = message;
+  clearTimeout(saveStatusTimer);
+  saveStatusTimer = setTimeout(() => { el.textContent = ""; }, 1400);
+}
+
+function saveCurrentMemo({notify = false} = {}){
+  if(!selectedDay) return;
+  const m = DATA[currentMonthIndex];
+  if(!m) return;
+  const memoEl = document.getElementById("memo");
+  setMemo(m.year, m.month, selectedDay.day, memoEl ? memoEl.value : "");
+  if(notify) showSaveStatus("保存しました");
+}
+
+function closePanel(){
+  detailPanel.classList.remove("open");
+  detailBackdrop.classList.remove("open");
+  detailPanel.style.transform = "";
+}
 
 function renderMonthlyMemoList(m){
   const listEl = document.getElementById("monthlyMemoList");
@@ -26,99 +151,262 @@ function renderMonthlyMemoList(m){
   const daysInMonth = new Date(m.year, m.month, 0).getDate();
 
   for(let day=1; day<=daysInMonth; day++){
-    const memo = getMemo(m.month, day).trim();
-    if(memo){
-      items.push({day, memo});
-    }
+    const memo = getMemo(m.year, m.month, day).trim();
+    if(memo) items.push({day, memo});
   }
 
   if(!items.length){
     const li = document.createElement("li");
-    li.innerHTML = `<span class="emptyText">【予定なし】</span>`;
+    li.innerHTML = '<span class="emptyText">【予定なし】</span>';
     listEl.appendChild(li);
     return;
   }
 
   items.forEach(item => {
     const li = document.createElement("li");
-    li.innerHTML = `<span class="listDate">${m.month}/${item.day}</span><span>${item.memo.replace(/\\n/g, " / ")}</span>`;
+    const safeMemo = item.memo.replace(/\n/g, " / ");
+    li.innerHTML = `<span class="listDate">${m.month}/${item.day}</span><span>${safeMemo}</span>`;
     listEl.appendChild(li);
   });
 }
 
+function addCompactListItem(listEl, dateLabel, text, type){
+  const li = document.createElement("li");
+  const badge = type === "season" ? '<span class="seasonBadge">季節暦</span>' : "";
+  li.innerHTML = `<span class="listDate">${dateLabel}</span><span>${badge}${text}</span>`;
+  listEl.appendChild(li);
+}
+
 function renderMonth(){
-  const m = DATA[currentMonthIndex]; if(!m) return;
+  const m = DATA[currentMonthIndex];
+  if(!m) return;
+
+  localStorage.setItem(STORAGE.lastMonth, monthId(m));
   monthSelect.value = currentMonthIndex;
-  monthTitle.textContent = `${m.month}月`;
+  monthTitle.textContent = `${m.year}年${m.month}月`;
+  monthBrandLine.textContent = `${m.year} / OKINAWA TECHO＋`;
   monthMeta.textContent = `${m.dialect || ""} / ${m.english || ""}`;
   renderMonthlyMemoList(m);
+
   seasonText.innerHTML = "";
-  const list = [];
-  (m.days || []).forEach(d => { if (d.events && d.events.length) d.events.forEach(e => list.push(`${m.month}/${d.day}　${e}`)); });
-  const seasons = Array.isArray(m.season) ? m.season : (m.season ? [m.season] : []);
-  seasons.forEach(s => { const text = String(s).replace(/\s+/g, " ").trim(); if (text && !/^[\d〜～\/\-\(\)（）]+$/.test(text)) list.push(`季節暦　${text}`); });
-  (list.length ? list : ["今月の行事・季節暦情報はありません。"]).forEach(s => { const li = document.createElement("li"); const parts = String(s).split("　");
-    if(parts.length >= 2 && /^\d+\/\d+/.test(parts[0])){
-      li.innerHTML = `<span class="listDate">${parts[0]}</span><span>${parts.slice(1).join("　")}</span>`;
-    }else{
-      li.textContent = s;
-    } seasonText.appendChild(li); });
+  let count = 0;
+  (m.days || []).forEach(d => {
+    (d.events || []).forEach(event => {
+      addCompactListItem(seasonText, `${m.month}/${d.day}`, event, "event");
+      count++;
+    });
+    (d.seasons || []).forEach(season => {
+      addCompactListItem(seasonText, `${m.month}/${d.day}`, season, "season");
+      count++;
+    });
+  });
+
+  if(!count){
+    const li = document.createElement("li");
+    li.textContent = "今月の沖縄行事・季節暦情報はありません。";
+    seasonText.appendChild(li);
+  }
+
   calendarGrid.innerHTML = "";
   const firstBlank = weekdayMondayFirst(m.year, m.month, 1);
-  for(let i=0; i<firstBlank; i++){ const empty = document.createElement("div"); empty.className = "dayCell empty"; calendarGrid.appendChild(empty); }
+  for(let i=0; i<firstBlank; i++){
+    const empty = document.createElement("div");
+    empty.className = "dayCell empty";
+    calendarGrid.appendChild(empty);
+  }
+
   const daysInMonth = new Date(m.year, m.month, 0).getDate();
-  const byDay = {}; (m.days || []).forEach(d => byDay[d.day] = d);
+  const byDay = {};
+  (m.days || []).forEach(d => byDay[d.day] = d);
+
   for(let day=1; day<=daysInMonth; day++){
-    const d = byDay[day] || { day, lunar:"", rokuyo:"", zodiac:"", events:[] };
+    const d = byDay[day] || {
+      day, lunar:"", rokuyo:"", zodiac:"", events:[], seasons:[]
+    };
     const cell = document.createElement("button");
-    const wd = new Date(m.year, m.month-1, day).getDay();
-    cell.className = "dayCell" + (wd===0 || isHolidayLike(d) ? " sun" : wd===6 ? " sat" : "");
-    cell.innerHTML = `<span class="dayNum">${day}</span><span class="lunarMini">${d.lunar || ""}</span>${(d.events && d.events.length) ? '<span class="eventDot"></span>' : ''}${getMemo(m.month, day) ? '<span class="memoDot"></span>' : ''}`;
+    const wd = new Date(m.year, m.month - 1, day).getDay();
+    cell.className = "dayCell" +
+      (wd === 0 || isHolidayLike(d) ? " sun" : wd === 6 ? " sat" : "");
+
+    const hasOfficialInfo = (d.events && d.events.length) || (d.seasons && d.seasons.length);
+    const hasMemo = Boolean(getMemo(m.year, m.month, day));
+
+    cell.innerHTML = `
+      <span class="dayNum">${day}</span>
+      <span class="lunarMini">${d.lunar || ""}</span>
+      ${hasOfficialInfo ? '<span class="eventDot"></span>' : ''}
+      ${hasMemo ? '<span class="memoDot"></span>' : ''}
+    `;
     cell.onclick = () => openDetail(d);
     calendarGrid.appendChild(cell);
   }
 }
+
+function updateDayNav(){
+  const prev = document.getElementById("prevDay");
+  const next = document.getElementById("nextDay");
+  if(!prev || !next || !selectedDay){
+    if(prev) prev.disabled = true;
+    if(next) next.disabled = true;
+    return;
+  }
+  const atFirst = currentMonthIndex === 0 && selectedDay.day === 1;
+  const current = DATA[currentMonthIndex];
+  const lastDay = new Date(current.year, current.month, 0).getDate();
+  const atLast = currentMonthIndex === DATA.length - 1 && selectedDay.day === lastDay;
+  prev.disabled = atFirst;
+  next.disabled = atLast;
+}
+
 function openDetail(d){
-  const m = DATA[currentMonthIndex]; selectedDay = d;
-  document.getElementById("detailTitle").textContent = `${m.month}月${d.day}日`;
+  const m = DATA[currentMonthIndex];
+  selectedDay = d;
+
+  document.getElementById("detailTitle").textContent =
+    `${m.year}年${m.month}月${d.day}日`;
   document.getElementById("detailLunar").textContent = d.lunar || "-";
   document.getElementById("detailRokuyo").textContent = d.rokuyo || "-";
   document.getElementById("detailZodiac").textContent = d.zodiac || "-";
-  const ev = document.getElementById("detailEvents"); ev.innerHTML = "";
-  const events = d.events && d.events.length ? d.events : ["行事情報はありません。"];
-  events.forEach(e => { const li = document.createElement("li"); li.textContent = e; ev.appendChild(li); });
-  document.getElementById("memo").value = getMemo(m.month, d.day);
+
+  const ev = document.getElementById("detailEvents");
+  ev.innerHTML = "";
+  const information = [
+    ...(d.events || []).map(text => ({label:"行事", text})),
+    ...(d.seasons || []).map(text => ({label:"季節暦", text}))
+  ];
+
+  if(!information.length){
+    const li = document.createElement("li");
+    li.textContent = "行事情報はありません。";
+    ev.appendChild(li);
+  }else{
+    information.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.label}：${item.text}`;
+      ev.appendChild(li);
+    });
+  }
+
+  document.getElementById("memo").value =
+    getMemo(m.year, m.month, d.day);
+  updateDayNav();
   openPanel();
+  detailPanel.scrollTop = 0;
 }
+
+function moveSelectedDay(offset){
+  if(!selectedDay || !offset) return;
+
+  saveCurrentMemo();
+
+  const m = DATA[currentMonthIndex];
+  const currentDate = new Date(m.year, m.month - 1, selectedDay.day);
+  currentDate.setDate(currentDate.getDate() + offset);
+
+  const targetYear = currentDate.getFullYear();
+  const targetMonth = currentDate.getMonth() + 1;
+  const targetDay = currentDate.getDate();
+  const targetMonthIndex = findMonthIndex(targetYear, targetMonth);
+
+  if(targetMonthIndex < 0) return;
+
+  if(targetMonthIndex !== currentMonthIndex){
+    currentMonthIndex = targetMonthIndex;
+    renderMonth();
+  }else{
+    renderMonthlyMemoList(DATA[currentMonthIndex]);
+  }
+
+  const targetMonthData = DATA[currentMonthIndex];
+  const targetDayData = (targetMonthData.days || []).find(item => item.day === targetDay) || {
+    day: targetDay, lunar:"", rokuyo:"", zodiac:"", events:[], seasons:[]
+  };
+  openDetail(targetDayData);
+}
+
 document.getElementById("closeDetail").onclick = closePanel;
 detailBackdrop.addEventListener("click", closePanel);
-document.getElementById("saveMemo").onclick = () => { const m = DATA[currentMonthIndex]; if(!selectedDay) return; setMemo(m.month, selectedDay.day, document.getElementById("memo").value); renderMonth(); closePanel(); };
-monthSelect.onchange = () => { currentMonthIndex = Number(monthSelect.value); renderMonth(); };
-document.getElementById("prevMonth").onclick = () => { currentMonthIndex = Math.max(0, currentMonthIndex - 1); renderMonth(); };
-document.getElementById("nextMonth").onclick = () => { currentMonthIndex = Math.min(DATA.length - 1, currentMonthIndex + 1); renderMonth(); };
-document.getElementById("todayBtn").onclick = () => { currentMonthIndex = 0; renderMonth(); };
-let startY = 0, lastY = 0, dragging = false;
-detailPanel.addEventListener("touchstart", (e) => { if(!detailPanel.classList.contains("open")) return; startY = e.touches[0].clientY; lastY = startY; dragging = true; }, {passive:true});
-detailPanel.addEventListener("touchmove", (e) => { if(!dragging) return; lastY = e.touches[0].clientY; const diff = lastY - startY; if(diff > 0 && detailPanel.scrollTop <= 2) detailPanel.style.transform = `translateY(${Math.min(diff, 180)}px)`; }, {passive:true});
-detailPanel.addEventListener("touchend", () => { if(!dragging) return; const diff = lastY - startY; dragging = false; detailPanel.style.transform = ""; if(diff > 80 && detailPanel.scrollTop <= 6) closePanel(); });
-renderMonth();
 
+document.getElementById("saveMemo").onclick = () => {
+  if(!selectedDay) return;
+  saveCurrentMemo({notify:true});
+  renderMonth();
+  closePanel();
+};
 
-// v8: 2回目以降はトップバナーをコンパクト表示
-(function(){
-  const key = "okinawa_techo_plus_has_visited";
-  const alreadyVisited = localStorage.getItem(key) === "1";
-  if(alreadyVisited){
-    document.body.classList.add("returning-user");
-  }else{
-    localStorage.setItem(key, "1");
+document.getElementById("prevDay").onclick = () => moveSelectedDay(-1);
+document.getElementById("nextDay").onclick = () => moveSelectedDay(1);
+
+monthSelect.onchange = () => {
+  currentMonthIndex = Number(monthSelect.value);
+  renderMonth();
+};
+
+document.getElementById("prevMonth").onclick = () => {
+  if(currentMonthIndex > 0){
+    currentMonthIndex--;
+    renderMonth();
   }
-})();
+};
 
-// v8: ホーム画面追加方法
-const installButtonV8 = document.querySelector('.installMini button');
-if(installButtonV8){
-  installButtonV8.onclick = () => {
-    alert('ホーム画面への追加方法\\n\\n【iPhone】Safari下部の共有アイコン → 下へスクロール →「ホーム画面に追加」\\n\\n【Android】Chrome右上の「︙」→「ホーム画面に追加」');
+document.getElementById("nextMonth").onclick = () => {
+  if(currentMonthIndex < DATA.length - 1){
+    currentMonthIndex++;
+    renderMonth();
+  }
+};
+
+document.getElementById("todayBtn").onclick = () => {
+  currentMonthIndex = nearestTodayIndex();
+  renderMonth();
+};
+
+let startY = 0;
+let lastY = 0;
+let dragging = false;
+
+detailPanel.addEventListener("touchstart", e => {
+  if(!detailPanel.classList.contains("open")) return;
+  startY = e.touches[0].clientY;
+  lastY = startY;
+  dragging = true;
+}, {passive:true});
+
+detailPanel.addEventListener("touchmove", e => {
+  if(!dragging) return;
+  lastY = e.touches[0].clientY;
+  const diff = lastY - startY;
+  if(diff > 0 && detailPanel.scrollTop <= 2){
+    detailPanel.style.transform = `translateY(${Math.min(diff, 180)}px)`;
+  }
+}, {passive:true});
+
+detailPanel.addEventListener("touchend", () => {
+  if(!dragging) return;
+  const diff = lastY - startY;
+  dragging = false;
+  detailPanel.style.transform = "";
+  if(diff > 80 && detailPanel.scrollTop <= 6) closePanel();
+});
+
+// First visit / returning-user banner mode.
+if(localStorage.getItem(STORAGE.visited) === "1"){
+  document.body.classList.add("returning-user");
+}else{
+  localStorage.setItem(STORAGE.visited, "1");
+}
+
+// Home screen instructions.
+const installButton = document.querySelector(".installMini button");
+if(installButton){
+  installButton.onclick = () => {
+    alert(
+      "ホーム画面への追加方法\n\n" +
+      "【iPhone】Safari下部の共有アイコン → 下へスクロール →「ホーム画面に追加」\n\n" +
+      "【Android】Chrome右上の「︙」→「ホーム画面に追加」"
+    );
   };
 }
+
+currentMonthIndex = initialMonthIndex();
+renderMonth();

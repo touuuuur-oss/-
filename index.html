@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>沖縄手帳＋ 2026｜社内運用版</title>
-  <meta name="description" content="いつもの沖縄手帳を、スマホでも。旧暦・六曜・沖縄行事・季節暦を確認できる沖縄手帳社内運用版。">
-  <link rel="stylesheet" href="style-v102.css">
+  <title>沖縄手帳＋ 2026</title>
+  <meta name="description" content="いつもの沖縄手帳を、スマホでも。旧暦・六曜・沖縄行事・季節暦を確認できる沖縄手帳Web版プレ。">
+  <link rel="stylesheet" href="style.css?v=1.0.4">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
       <div class="eyebrow">OKINAWA TECHO PLUS</div>
       <h1>沖縄手帳＋ <span>2026</span></h1>
       <p class="lead">いつもの沖縄手帳を、スマホでも。</p>
-      <p class="copy">旧暦・六曜・沖縄行事・季節暦を、毎日の予定と一緒に。沖縄の暮らしに寄り添う、社内運用版です。</p>
+      <p class="copy">旧暦・六曜・沖縄行事・季節暦を、毎日の予定と一緒に。沖縄の暮らしに寄り添う、Web版プレです。</p>
       <div class="featurePills">
         <div>旧暦</div><div>六曜</div><div>沖縄行事</div><div>季節暦</div>
       </div>
@@ -99,6 +99,11 @@
       </div>
       <button id="closeDetail" type="button">閉じる</button>
     </div>
+    <nav class="dayNav" aria-label="日付を移動">
+      <button id="prevDay" type="button">‹ 前の日</button>
+      <span id="saveStatus" class="saveStatus" aria-live="polite"></span>
+      <button id="nextDay" type="button">次の日 ›</button>
+    </nav>
     <div class="infoGrid">
       <div><span>旧暦</span><strong id="detailLunar">-</strong></div>
       <div><span>六曜</span><strong id="detailRokuyo">-</strong></div>
@@ -114,7 +119,7 @@
   </section>
 </main>
 
-<script src="data-v102.js"></script>
-<script src="app-v102.js"></script>
+<script src="data.js?v=1.0.4"></script>
+<script src="script.js?v=1.0.4"></script>
 </body>
 </html>

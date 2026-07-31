@@ -324,3 +324,106 @@ body.returning-user .bookGlow{
     max-height:180px!important;
   }
 }
+
+
+/* v10: 8-month data and persistence-safe UI */
+.seasonBadge{
+  display:inline-block;
+  margin-right:6px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:#efe2c5;
+  color:#805b19;
+  font-size:10px;
+  font-weight:900;
+  vertical-align:1px;
+}
+.monthNav button:disabled{
+  opacity:.35;
+  cursor:default;
+}
+
+
+/* v1.0.4: Safari／ホーム画面で共通のバナー表示 */
+body.returning-user .heroInner,
+.heroInner{
+  min-height:220px!important;
+  padding:22px 0 18px!important;
+  grid-template-columns:1fr auto!important;
+  gap:18px!important;
+}
+body.returning-user .eyebrow,
+.eyebrow,
+body.returning-user .copy,
+.copy,
+body.returning-user .featurePills,
+.featurePills{
+  display:none!important;
+}
+body.returning-user .hero h1,
+.hero h1{
+  margin:0!important;
+  font-size:clamp(30px,6vw,46px)!important;
+  white-space:normal!important;
+  line-height:1.08!important;
+}
+body.returning-user .lead,
+.lead{
+  margin:12px 0 0!important;
+  font-size:clamp(16px,2.8vw,21px)!important;
+  line-height:1.5!important;
+}
+body.returning-user .bookCard,
+.bookCard{
+  width:112px!important;
+  height:160px!important;
+  border-radius:5px!important;
+  transform:none!important;
+}
+body.returning-user .bookGlow,
+.bookGlow{display:none!important;}
+
+.dayNav{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:10px;
+  margin:0 0 14px;
+}
+.dayNav button{
+  min-height:44px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fffaf0;
+  color:var(--navy);
+  font-size:15px;
+  font-weight:900;
+}
+.dayNav button:last-child{text-align:right;padding-right:16px;}
+.dayNav button:first-child{text-align:left;padding-left:16px;}
+.dayNav button:disabled{opacity:.35;cursor:not-allowed;}
+.saveStatus{
+  min-width:64px;
+  color:#7b5618;
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+
+@media(max-width:780px){
+  body.returning-user .heroInner,
+  .heroInner{
+    min-height:190px!important;
+    height:190px!important;
+    padding:18px 0!important;
+    grid-template-columns:minmax(0,1fr) 86px!important;
+    gap:12px!important;
+  }
+  body.returning-user .hero h1,
+  .hero h1{font-size:clamp(29px,8vw,39px)!important;}
+  body.returning-user .lead,
+  .lead{font-size:15px!important;margin-top:10px!important;}
+  body.returning-user .bookCard,
+  .bookCard{width:78px!important;height:112px!important;}
+  .dayNav{position:sticky;top:0;background:white;z-index:2;padding:4px 0 10px;}
+}
