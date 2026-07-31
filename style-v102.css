@@ -1,0 +1,344 @@
+:root{--navy:#07243d;--gold:#c99a42;--gold2:#f0cf7b;--bg:#f5f1e8;--paper:#fffdf8;--ink:#222;--muted:#6a6258;--line:#e2d8c8;--red:#d12d2a;--blue:#145da0;--brown:#6f3f2a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
+.appHeader{position:sticky;top:0;z-index:30;height:54px;display:flex;align-items:center;padding:0 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
+.brandMini{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:900;font-size:20px;letter-spacing:.04em}.brandMini span{color:var(--gold)}
+.hero{position:relative;overflow:hidden;color:#111;background:#d7eef6}.heroBg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.80) 46%,rgba(255,255,255,.18) 100%),radial-gradient(circle at 12% 92%,rgba(229,61,47,.48),transparent 16%),radial-gradient(circle at 85% 72%,rgba(8,123,71,.24),transparent 18%),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop") center/cover}
+.heroInner{position:relative;z-index:2;width:min(1120px,92%);margin:auto;min-height:570px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:36px;padding:54px 0}
+.eyebrow{display:inline-flex;border:1px solid rgba(201,154,66,.48);color:#96691d;background:rgba(255,255,255,.70);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:900;letter-spacing:.12em}
+.hero h1{margin:22px 0 0;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(42px,8vw,80px);line-height:1.05;letter-spacing:.02em;white-space:nowrap}.hero h1 span{color:var(--gold)}
+.lead{margin:22px 0 0;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.55}.copy{max-width:620px;margin:18px 0 0;line-height:1.9;font-weight:700;color:#2f2f2f}
+.featurePills{margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:620px}.featurePills div{background:rgba(255,255,255,.80);border:1.4px solid rgba(201,154,66,.68);color:#8b631e;border-radius:999px;padding:15px 8px;text-align:center;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.08)}
+.bookVisual{display:flex;justify-content:center;align-items:center;position:relative}.bookGlow{position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(240,207,123,.25);filter:blur(38px)}
+.bookCard{position:relative;width:min(260px,58vw);height:370px;border-radius:8px;overflow:hidden;background:#111;box-shadow:0 28px 54px rgba(0,0,0,.34);border:1px solid rgba(0,0,0,.30);transform:rotate(-2deg)}.bookCard img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.app{width:min(780px,94%);margin:auto;padding:18px 0 56px}.installGuide{display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid rgba(201,154,66,.32);border-radius:22px;padding:16px;margin:18px 0;box-shadow:0 10px 26px rgba(0,0,0,.05)}
+.installIcon{width:48px;height:48px;border-radius:16px;background:var(--navy);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0}.installGuide h2{margin:0 0 6px;font-size:17px}.installGuide p{margin:0;line-height:1.75;color:var(--muted);font-size:13px}
+.monthPanel{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:15px;box-shadow:0 8px 24px rgba(80,55,20,.06)}.monthNav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}.monthNav button{border:none;background:var(--navy);color:white;border-radius:13px;padding:12px 8px;font-weight:900}
+.monthTitleArea{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}.small{color:#b98a35;font-size:12px;font-weight:900;letter-spacing:.12em}.monthTitleArea h2{margin:6px 0 0;font-size:40px;line-height:1}.monthTitleArea p{margin:8px 0 0;font-weight:800;color:var(--muted)}select{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white;font-weight:900}
+.legendBox{display:flex;gap:16px;background:white;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:12px 0;font-size:13px;font-weight:900}.legendBox div{display:flex;align-items:center;gap:7px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dot.gold{background:var(--gold)}.dot.black{background:#111}
+.weekHeader{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:12px 0 6px;font-size:13px;font-weight:950;text-align:center}.weekHeader div:nth-child(-n+5){color:#222}.weekHeader div:nth-child(6){color:var(--blue)}.weekHeader div:nth-child(7){color:var(--red)}
+.calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.dayCell{min-height:76px;border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:8px 4px;text-align:center;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center}.dayCell.empty{opacity:.38;cursor:default;background:#eee8dc}
+.dayNum{display:block;width:100%;text-align:center;font-size:23px;font-weight:950;line-height:1}.dayCell.sun .dayNum{color:var(--red)}.dayCell.sat .dayNum{color:var(--blue)}.dayCell:not(.sun):not(.sat) .dayNum{color:#222}.lunarMini{display:block;max-width:100%;margin-top:7px;color:var(--brown);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}.eventDot,.memoDot{position:absolute;bottom:7px;width:7px;height:7px;border-radius:50%}.eventDot{right:7px;background:var(--gold)}.memoDot{left:7px;background:#111}
+.monthlyInfo{margin-top:18px;background:#fffaf0;border:1px solid var(--line);border-radius:22px;padding:16px}.monthlyInfo ul{margin:10px 0 0;padding-left:20px;color:#5f554a;line-height:1.65;font-size:14px}.monthlyInfo li{padding:5px 0;border-bottom:1px dashed rgba(111,63,42,.18)}.monthlyInfo li:last-child{border-bottom:0}
+.detailBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.26);opacity:0;pointer-events:none;transition:.2s ease;z-index:49}.detailBackdrop.open{opacity:1;pointer-events:auto}.detailPanel{position:fixed;left:0;right:0;bottom:-100%;z-index:50;max-height:82vh;overflow:auto;background:white;border-radius:26px 26px 0 0;padding:10px 18px 24px;box-shadow:0 -12px 44px rgba(0,0,0,.25);transition:.25s ease;touch-action:pan-y}.detailPanel.open{bottom:0}.handle{width:54px;height:6px;background:#ddd;border-radius:999px;margin:4px auto 14px}.detailHead{display:flex;justify-content:space-between;align-items:flex-start}.detailHead h3{margin:6px 0 12px;font-size:28px}#closeDetail{border:1px solid var(--line);background:#f6f3ed;border-radius:999px;padding:8px 12px;font-weight:800}
+.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.infoGrid div{background:#f8f5ef;border:1px solid var(--line);border-radius:14px;padding:10px}.infoGrid span{display:block;color:var(--muted);font-size:11px;font-weight:800}.infoGrid strong{display:block;margin-top:4px;font-size:14px}.eventBox{margin-top:14px;border:1px solid var(--line);background:#fffdf8;border-radius:16px;padding:12px}.eventBox ul{margin:8px 0 0;padding-left:20px}.eventBox li{margin:4px 0}.memoLabel{display:block;margin:14px 0 8px;font-weight:900}textarea{width:100%;min-height:92px;border:1px solid var(--line);border-radius:16px;padding:12px;font-size:16px}.saveBtn{width:100%;margin-top:10px;border:none;background:var(--navy);color:white;border-radius:14px;padding:14px;font-weight:900;font-size:16px}
+@media(max-width:780px){.heroInner{grid-template-columns:1fr;min-height:auto;padding:34px 0 36px;gap:26px}.featurePills{grid-template-columns:repeat(2,1fr)}.bookCard{width:min(190px,48vw);height:270px}.hero h1{font-size:clamp(38px,11vw,48px)}}@media(min-width:820px){.detailPanel{width:760px;margin:auto}.dayCell{min-height:94px}}
+
+
+/* v7 UX refinement */
+.hero{
+  min-height:auto!important;
+}
+.heroInner{
+  min-height:360px!important;
+  padding:28px 0 18px!important;
+  align-items:center!important;
+}
+.hero h1{
+  font-size:clamp(34px,7vw,62px)!important;
+}
+.lead{
+  margin-top:14px!important;
+  font-size:clamp(18px,3vw,24px)!important;
+}
+.copy{
+  margin-top:10px!important;
+  font-size:14px!important;
+  line-height:1.8!important;
+  max-width:520px!important;
+}
+.featurePills{
+  margin-top:20px!important;
+  max-width:480px!important;
+  gap:10px!important;
+}
+.featurePills div{
+  padding:10px 8px!important;
+  font-size:13px!important;
+}
+.bookCard{
+  width:min(200px,46vw)!important;
+  height:290px!important;
+  transform:none!important;
+  border-radius:4px!important;
+}
+.bookGlow{
+  width:180px!important;
+  height:180px!important;
+  opacity:.55!important;
+}
+.installMini{
+  margin:10px 0 14px!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+}
+.installMini button{
+  border:none!important;
+  background:transparent!important;
+  color:#8b631e!important;
+  font-weight:900!important;
+  font-size:13px!important;
+}
+.monthPanel{
+  margin-top:0!important;
+}
+.monthNav{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:18px!important;
+}
+.monthNav button{
+  background:transparent!important;
+  color:#07243d!important;
+  padding:6px 8px!important;
+  font-size:15px!important;
+}
+#todayBtn{
+  font-size:26px!important;
+  font-weight:900!important;
+}
+.legendBox{
+  background:transparent!important;
+  border:none!important;
+  padding:8px 2px!important;
+  margin:6px 0 10px!important;
+}
+.dayCell{
+  background:#fffefb!important;
+}
+.detailPanel{
+  border-radius:30px 30px 0 0!important;
+  padding-top:6px!important;
+}
+#closeDetail{
+  opacity:.6!important;
+}
+@media(max-width:780px){
+  .heroInner{
+    grid-template-columns:1fr .7fr!important;
+    gap:8px!important;
+  }
+  .hero h1{
+    white-space:normal!important;
+    line-height:1.08!important;
+  }
+  .featurePills{
+    grid-template-columns:repeat(2,1fr)!important;
+  }
+  .bookCard{
+    width:140px!important;
+    height:205px!important;
+  }
+}
+
+
+/* v8: first view smaller + returning-user compact hero */
+.heroInner{
+  min-height:300px!important;
+  padding:22px 0 14px!important;
+}
+.hero h1{
+  font-size:clamp(30px,6vw,54px)!important;
+}
+.lead{
+  font-size:clamp(17px,2.7vw,22px)!important;
+}
+.copy{
+  font-size:13.5px!important;
+}
+.featurePills{
+  margin-top:16px!important;
+}
+.bookCard{
+  width:min(170px,42vw)!important;
+  height:245px!important;
+}
+
+.installMini{
+  margin:8px 0 12px!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+}
+.installMini button{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  border:1px solid rgba(201,154,66,.28)!important;
+  background:rgba(255,255,255,.72)!important;
+  color:#7b5618!important;
+  border-radius:999px!important;
+  padding:8px 12px!important;
+  font-weight:900!important;
+  font-size:12.5px!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.04)!important;
+}
+.installMiniIcon{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:20px!important;
+  height:20px!important;
+  border-radius:50%!important;
+  background:#07243d!important;
+  color:#f0cf7b!important;
+  font-size:15px!important;
+  line-height:1!important;
+}
+
+/* 2回目以降 */
+body.returning-user .heroInner{
+  min-height:150px!important;
+  padding:14px 0 10px!important;
+  grid-template-columns:1fr auto!important;
+}
+body.returning-user .eyebrow,
+body.returning-user .copy,
+body.returning-user .featurePills{
+  display:none!important;
+}
+body.returning-user .hero h1{
+  font-size:clamp(25px,5vw,36px)!important;
+  margin:0!important;
+}
+body.returning-user .lead{
+  font-size:14px!important;
+  margin-top:8px!important;
+}
+body.returning-user .bookCard{
+  width:76px!important;
+  height:108px!important;
+  border-radius:4px!important;
+}
+body.returning-user .bookGlow{
+  display:none!important;
+}
+
+@media(max-width:780px){
+  .heroInner{
+    min-height:260px!important;
+    padding:20px 0 12px!important;
+  }
+  .bookCard{
+    width:118px!important;
+    height:172px!important;
+  }
+  body.returning-user .heroInner{
+    min-height:126px!important;
+    grid-template-columns:1fr auto!important;
+  }
+  body.returning-user .bookCard{
+    width:58px!important;
+    height:82px!important;
+  }
+}
+
+
+/* v9: monthly schedule list and compact lower layout */
+.monthListCard{
+  margin-top:12px!important;
+  background:#fffdf8!important;
+  border:1px solid var(--line)!important;
+  border-radius:20px!important;
+  padding:14px!important;
+  box-shadow:0 6px 18px rgba(80,55,20,.045)!important;
+}
+.listHeader{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin-bottom:8px!important;
+}
+.listHeader h3{
+  margin:4px 0 0!important;
+  font-size:18px!important;
+  line-height:1.2!important;
+}
+.listNote{
+  display:inline-flex!important;
+  align-items:center!important;
+  border-radius:999px!important;
+  background:#f4efe3!important;
+  color:#7b5618!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  padding:5px 8px!important;
+  white-space:nowrap!important;
+}
+.compactList{
+  list-style:none!important;
+  margin:0!important;
+  padding:0!important;
+  color:#51483f!important;
+  font-size:14px!important;
+  line-height:1.45!important;
+}
+.compactList li{
+  display:flex!important;
+  gap:8px!important;
+  align-items:flex-start!important;
+  padding:7px 0!important;
+  border-bottom:1px dashed rgba(111,63,42,.16)!important;
+}
+.compactList li:last-child{
+  border-bottom:0!important;
+}
+.compactList .listDate{
+  min-width:44px!important;
+  color:#9a6e22!important;
+  font-weight:900!important;
+  flex-shrink:0!important;
+}
+.compactList .emptyText{
+  color:#8a8178!important;
+  font-weight:800!important;
+}
+.monthlyInfo{
+  max-height:260px!important;
+  overflow:auto!important;
+}
+.monthlySchedule{
+  max-height:210px!important;
+  overflow:auto!important;
+}
+.monthlyInfo ul,
+.monthlyInfo li{
+  margin:0!important;
+  padding-left:0!important;
+}
+@media(max-width:780px){
+  .monthListCard{
+    padding:12px!important;
+    border-radius:18px!important;
+  }
+  .listHeader h3{
+    font-size:16px!important;
+  }
+  .compactList{
+    font-size:13px!important;
+  }
+  .monthlyInfo{
+    max-height:230px!important;
+  }
+  .monthlySchedule{
+    max-height:180px!important;
+  }
+}
+
+
+/* v10: 8-month data and persistence-safe UI */
+.seasonBadge{
+  display:inline-block;
+  margin-right:6px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:#efe2c5;
+  color:#805b19;
+  font-size:10px;
+  font-weight:900;
+  vertical-align:1px;
+}
+.monthNav button:disabled{
+  opacity:.35;
+  cursor:default;
+}
